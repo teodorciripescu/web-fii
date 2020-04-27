@@ -1,0 +1,1 @@
+exports.apiAuthController = require('./api_controllers/apiAuthController');
