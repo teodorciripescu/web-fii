@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+}
+
+/*header{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.navbar ul {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    list-style-type: none;*/
+/*    margin: 0;*/
+/*    !*  overflow hidden in order  to clip content(otherwise it adds a scrollbar when an element's content is too big)*!*/
+/*    overflow: hidden;*/
+/*    background-color: #333;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/
+
+/*.navbar li {*/
+/*    float: left;*/
+/*}*/
+
+/*.navbar li a {*/
+
+/*    display: block; !* displays new elements on a new line *!*/
+/*    color: white;*/
+/*    padding: 14px 16px;*/
+/*    text-decoration: none; !* get rid of underline *!*/
+/*}*/
+
+/*!* Change the link color to #111 (black) on hover *!*/
+/*.navbar li a:hover {*/
+/*    background-color: #111;*/
+/*}*/

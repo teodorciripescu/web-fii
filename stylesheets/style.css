@@ -1,0 +1,37 @@
+body{
+    margin:0;
+}
+@media(min-width: 768px){
+    .container-navbar{
+        display: flex;
+        background-color: navajowhite;
+    }
+    .element-navbar{
+        flex:1;/*number of columns each element should occupy*/
+        text-align: center;
+    }
+    .element-login-navbar{
+        flex:2;
+        text-align: right;
+    }
+}
+@media(max-width: 768px){
+    .container-navbar{
+        background-color: navajowhite;
+    }
+}
+.container-navbar div {
+    border: 1px #ccc solid;
+    padding: 10px;
+
+}
+.container-navbar div a{
+     text-decoration: none;
+ }
+.container-navbar img{
+    width: 10%;
+
+}
+
+
+
