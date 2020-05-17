@@ -16,5 +16,6 @@ router.get('/', function (req, res) {
 
 const auth = require('./auth');
 router.use('/auth',auth);
-
+const categories = require('./categories');
+router.use('/categories', categories);
 module.exports = router;
