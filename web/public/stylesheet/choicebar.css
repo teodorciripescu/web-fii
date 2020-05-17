@@ -1,0 +1,200 @@
+
+
+.sidenav {/*container navbar*/
+
+    /*pozitionare*/
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    /*aspect*/
+    background-color: #111;
+    padding-top: 20px;
+    height: 100%;
+    width: 310px;
+
+    /*redimensionare*/
+    overflow-x: auto;
+
+}
+
+
+.dropdown-btn {/*container butoane */
+
+    /*aspect*/
+    padding: 6px 10px 10px 14px;
+    margin: 8px;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+
+    /*altele*/
+    cursor: pointer;
+    outline: none;
+
+    /*text*/
+    font-family: "DejaVu Serif",fantasy;
+    text-align: left;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+}
+
+
+
+.active {/*activare la selectare buton*/
+    background-color: #2196F3;
+    color: white;
+}
+
+.dropdown-container {/*container pt TOATE choice-urile disponibile*/
+    /*aspect*/
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+
+
+.fa-caret-down {/*modificari la icon*/
+    /*aspect*/
+    float: right;
+    padding-right: 8px;
+}
+
+/*responsiveness*/
+@media screen and (max-width: 700px) {
+    .sidenav {
+        /*aspect*/
+        width: 100%;
+        height: auto;
+        /*pozitionare*/
+        position: relative;
+    }
+    .sidenav a {float: left;}
+    div.content {margin-left: 0;}
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+
+}
+
+
+
+
+.container {/*container pt fiecare alegere in parte*/
+    /*pozitionare*/
+    display: block;
+    position: relative;
+    margin-bottom: 3px;
+
+    /*aspect*/
+    padding-left: 35px;
+    padding-top:9px;
+    height:38px;
+
+    /*altele*/
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    /*text*/
+    font-size: 19px;
+    color:DarkGray;
+
+
+}
+
+
+.container input {/*ascundem checkboxul default de la browser*/
+    /*pozitie*/
+    position: absolute;
+    opacity: 0;
+    /*aspect*/
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+}
+
+
+.checkmark {/*checkbox modificat*/
+    /*pozitie*/
+    position: absolute;
+    top: 9px;
+    left: 0;
+
+    /*aspect*/
+    height: 25px;
+    width: 25px;
+    background-color:#262635;
+    border: 1px solid #000000;
+
+
+}
+
+/*hovers*/
+
+.container:hover input ~ .checkmark {
+    background-color: #fff2a8;
+}
+.container:hover {
+    color: White;
+}
+
+/*checks*/
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+
+    /*aspect*/
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+
+    /*pozitionare*/
+    left: 9px;
+    top: 5px;
+
+}
+
+
+.buton-cautare{
+
+    /*aspect*/
+    background-color: #262635;
+    border-color: #111111;
+    border-radius:5px;
+    box-shadow: #111122;
+
+    /*pozitionare*/
+    position: relative;
+    top:2%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    /*text*/
+    font-size: large;
+    color: #818181;
+
+
+}
+

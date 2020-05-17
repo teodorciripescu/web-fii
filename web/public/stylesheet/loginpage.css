@@ -1,0 +1,144 @@
+
+.background{
+    background:url("../images/20.2.blur2.jpg") no-repeat fixed ;
+    display:flex;
+    background-size: cover;
+    z-index:-1;
+ }
+
+
+
+@media screen and (max-device-width: 1300px){
+    .background{
+        background:url("../images/20.2.blur2.jpg") no-repeat fixed ;
+        align-items: stretch;
+        max-width:100%;
+    }
+    .chenar{
+
+        height: 1000px;
+        width: 1050px;
+
+    }
+}
+
+@media screen and (max-width: 450px){
+    .credentiale{font-size: large;
+
+    }
+    .logare{
+        font-size: larger;
+    }
+}
+.chenar{/*un container*/
+
+    /*marime*/
+    width: 70vw;
+    height: 70vw;
+
+
+    /*pozitionare*/
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    z-index:1;
+
+    /*aspect*/
+    border-radius:5px;
+    background-color: #fff2d8;
+
+    /*flex */
+
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: baseline;
+    align-content: end;
+}
+
+.logare{
+    /*aspect*/
+    color:#262645;
+
+    /*pozitionare*/
+    position:absolute;
+    top:12%;
+    left:50%;
+    transform: translate(-50%,-50%);
+
+    /*text*/
+    font-size: xx-large;
+    font-family:American Typewriter, serif;
+
+}
+.credentiale{
+    /*text*/
+    font-size:large;
+    font-family:American Typewriter, serif;
+
+    /*aspect*/
+    color:#262635;
+
+    /*pozitionare*/
+    position:relative;
+    left:10%;
+    top:10%;
+
+
+}
+.in_chenar{
+    padding-top: 30px;
+}
+
+.patrat{
+
+    /*marime*/
+
+    max-height: 360px;
+    max-width: 360px;
+    min-width: 330px;
+    min-height: 330px;
+
+    /*pozitionare*/
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    z-index:1;
+
+    /*aspect*/
+    border-radius:5px;
+    border-bottom: solid #6495ED 3px;
+    border-right: solid #6495ED 2px;
+    opacity: 0.9;
+
+}
+
+.text_input{
+
+    opacity:initial !important
+}
+
+.btn{
+    /*pozitionare*/
+    position:absolute;
+    left:80%;
+    bottom:-2.5%;
+    transform: translate(-50%,-50%);
+
+    /*aspect*/
+    background-color: #fff2a8;
+    border-radius: 5px;
+    height:40px;
+    width:90px;
+    border-bottom: solid #6495ED 2px;
+    border-right: solid #6495ED 1px;
+
+    /*text*/
+    font-family:American Typewriter, serif;
+    color:#262635;
+
+}
+
+
