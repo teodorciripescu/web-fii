@@ -1,0 +1,15 @@
+1.SIMPLE: Source, Severity, Side, Timezone, Amenity, Bump, Crossing, Give_Way, Junction, No_Exit, Railway, Roundabout, Station, Stop, Traffic_Calming, Traffic_Signal, Turning_Loop, Sunrise_Sunset, Civil_Twilight, Nautical_Twilight, Astronomical_Twilight
+
+2.INTERVAL(with the option of 'user input interval'): Distance, Temperature, Wind_Chill, Humidity, Pressure, Visibility, Wind_Speed, Precipitation, Start_Time, End_Time, Weather_Timestamp
+Aceste invervale vor fi alese de catre noi.
+intervals:[{lower:0,upper:0.01},{lower:0.01,upper:1},{lower:0,upper:0.01}]
+[0, 0.01)
+
+3.DROPDOWN: Needs dropdown(user input search): TMC, (Street, Number), City, County, State, Airport_Code, Wind_Direction, Weather_Condition
+NOTE: poate tmc si number ar trebui sa fie explicit; poate in sql se poate face un convert la string si asa sa facem %LIKE pe ele
+4.EXPLICIT: User given: ID, Start_Lat, Start_Lng, End_Lat, End_Lng, Description, Zipcode
+
+
+
+null -> No info
+? symbol near them to give a description(frontend);

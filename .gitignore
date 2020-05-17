@@ -1,3 +1,4 @@
 .idea/
 web/node_modules/
 services/auth_service/node_modules/
+services/dataset_service/node_modules/

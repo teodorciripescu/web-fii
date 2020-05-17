@@ -1,0 +1,194 @@
+ID varchar(10)
+Source varchar(14)
+TMC decimal signed
+Severity SMALLINT
+Start_Time timestamp
+End_Time timestamp
+Start_Lat decimal signed
+Start_Lng decimal signed
+End_Lat decimal signed
+End_Lng decimal signed
+Distance(mi) decimal unsigned
+Description varchar(750)
+Number decimal unsigned
+Street varchar(20)
+Side varchar(1)
+City varchar(50)
+County varchar(50)
+State varchar(5)
+Zipcode varchar(20)
+Country varchar(2)
+Timezone varchar(15)
+Airport_Code varchar(10)
+Weather_Timestamp timestamp
+Temperature(F) decimal signed
+Wind_Chill(F) decimal signed
+Humidity(%) decimal signed
+Pressure(in) decimal signed
+Visibility(mi) decimal unsigned
+Wind_Direction varchar(20)
+Wind_Speed(mph) decimal unsigned
+Precipitation(in) decimal unsigned
+Weather_Condition varchar(50)
+Amenity boolean
+Bump boolean
+Crossing boolean
+Give_Way boolean
+Junction boolean
+No_Exit boolean
+Railway boolean
+Roundabout boolean
+Station boolean
+Stop boolean
+Traffic_Calming boolean
+Traffic_Signal boolean
+Turning_Loop boolean
+Sunrise_Sunset varchar(5)
+Civil_Twilight varchar(5)
+Nautical_Twilight varchar(5)
+Astronomical_Twilight varchar(5)
+
+
+CREATE ACCIDENTS TABLE SQL QUERIES:
+
+DROP TABLE accidents;
+CREATE TABLE accidents(
+    ID varchar(10),
+    Source varchar(14),
+    TMC decimal signed,
+    Severity SMALLINT,
+    Start_Time datetime,
+    End_Time datetime,
+    Start_Lat decimal signed,
+    Start_Lng decimal signed,
+    End_Lat decimal signed,
+    End_Lng decimal signed,
+    Distance decimal unsigned,
+    Description varchar(500),
+    Number decimal unsigned,
+    Street varchar(100),
+    Side varchar(1),
+    City varchar(50),
+    County varchar(50),
+    State varchar(5),
+    Zipcode varchar(20),
+    Country varchar(2),
+    Timezone varchar(15),
+    Airport_Code varchar(10),
+    Weather_Timestamp datetime,
+    Temperature decimal signed,
+    Wind_Chill decimal signed,
+    Humidity decimal signed,
+    Pressure decimal signed,
+    Visibility decimal unsigned,
+    Wind_Direction varchar(20),
+    Wind_Speed decimal unsigned,
+    Precipitation decimal unsigned,
+    Weather_Condition varchar(50),
+    Amenity boolean,
+    Bump boolean,
+    Crossing boolean,
+    Give_Way boolean,
+    Junction boolean,
+    No_Exit boolean,
+    Railway boolean,
+    Roundabout boolean,
+    Station boolean,
+    Stop boolean,
+    Traffic_Calming boolean,
+    Traffic_Signal boolean,
+    Turning_Loop boolean,
+    Sunrise_Sunset varchar(5),
+    Civil_Twilight varchar(5),
+    Nautical_Twilight varchar(5),
+    Astronomical_Twilight varchar(5)
+);
+alter table accidents
+	add constraint accidents_pk
+		primary key (ID);
+ALTER TABLE accidents MODIFY COLUMN Description VARCHAR(500)
+    CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE accidents MODIFY COLUMN County VARCHAR(50)
+    CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE accidents MODIFY COLUMN Street VARCHAR(100)
+    CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+    'Weather_Condition',
+    'Amenity',
+    'Bump' ,
+    'Crossing' ,
+    'Give_Way' ,
+    'Junction' ,
+    'No_Exit' ,
+    'Railway' ,
+    'Roundabout' ,
+    'Station' ,
+    'Stop' ,
+    'Traffic_Calming' ,
+    'Traffic_Signal' ,
+    'Turning_Loop' ,
+    'Sunrise_Sunset',
+    'Civil_Twilight' ,
+    'Nautical_Twilight',
+    'Astronomical_Twilight',
+
+    POSTGRESQL CREATE TABLE QUERIES:
+
+    DROP TABLE accidents;
+    CREATE TABLE accidents(
+            ID varchar(10),
+            Source varchar(14),
+            TMC decimal,
+            Severity SMALLINT,
+            Start_Time timestamp,
+            End_Time timestamp,
+            Start_Lat decimal,
+            Start_Lng decimal,
+            End_Lat decimal,
+            End_Lng decimal,
+            Distance decimal,
+            Description varchar(500),
+            Number decimal,
+            Street varchar(100),
+            Side varchar(10),
+            City varchar(50),
+            County varchar(50),
+            State varchar(5),
+            Zipcode varchar(20),
+            Country varchar(2),
+            Timezone varchar(15),
+            Airport_Code varchar(10),
+            Weather_Timestamp timestamp,
+            Temperature decimal,
+            Wind_Chill decimal,
+            Humidity decimal,
+            Pressure decimal,
+            Visibility decimal,
+            Wind_Direction varchar(20),
+            Wind_Speed decimal,
+            Precipitation decimal,
+            Weather_Condition varchar(50),
+            Amenity boolean,
+            Bump boolean,
+            Crossing boolean,
+            Give_Way boolean,
+            Junction boolean,
+            No_Exit boolean,
+            Railway boolean,
+            Roundabout boolean,
+            Station boolean,
+            Stop boolean,
+            Traffic_Calming boolean,
+            Traffic_Signal boolean,
+            Turning_Loop boolean,
+            Sunrise_Sunset varchar(5),
+            Civil_Twilight varchar(5),
+            Nautical_Twilight varchar(5),
+            Astronomical_Twilight varchar(5)
+        );
+        alter table accidents
+        	add constraint accidents_pk
+        		primary key (ID);
+
+
