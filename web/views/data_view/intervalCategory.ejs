@@ -1,0 +1,24 @@
+<div class="search-container">
+    <% if(intervalObj.key==='start_time'||intervalObj.key==='end_time'
+            ||intervalObj.key==='weather_timestamp'){
+        const minDate = new Date(intervalObj.min).toISOString().replace('Z', '');
+        const maxDate = new Date(intervalObj.max).toISOString().replace('Z', '');
+    %>
+    <input type="datetime-local" id="<%= 'min' + intervalObj.key + 'Input' %>"
+           value="<%= minDate %>"
+           min="<%= minDate%>" max="<%= maxDate%>">
+    <input type="datetime-local" id="<%= 'max' + intervalObj.key + 'Input' %>"
+           value="<%= maxDate%>"
+           min="<%= minDate%>" max="<%= maxDate%>">
+    <%} else{%>
+        <div class="search-container-item">
+            <input type="text" id="<%= 'min' + intervalObj.key + 'Input' %>" placeholder="lower limit (<%= intervalObj.min %>)">
+        </div>
+        <div class="search-container-item">
+            <input type="text" id="<%= 'max' + intervalObj.key + 'Input' %>" placeholder="higher limit (<%= intervalObj.max %>)">
+        </div>
+    <%}%>
+    <div class="search-container-item">
+        <input type="button" onclick="selectedInterval('<%= intervalObj.key %>', '<%= intervalObj.min%>', '<%= intervalObj.max %>')" value="Add/Remove Interval"/>
+    </div>
+</div>

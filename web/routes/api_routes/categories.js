@@ -1,7 +1,8 @@
 const Router = require('router');
 var router = Router();
-const {apiCategoriesController} = require('../../controllers');
+const {apiSuggestionsController, apiCategoriesController} = require('../../controllers');
 
-router.get('/suggestion', apiCategoriesController.suggestion);
+router.get('/suggestion', apiSuggestionsController);
+router.get('/', apiCategoriesController);
 
 module.exports = router;

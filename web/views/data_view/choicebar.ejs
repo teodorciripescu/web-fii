@@ -1,0 +1,89 @@
+<div class="sidenav">
+    <button id="getStatistics" class="buton-cautare">Get statistics   </button>
+
+    <%
+        const weatherConditions = ['temperature','wind_chill','humidity','pressure','visibility','wind_direction','wind_speed','precipitation','weather_condition'];
+        const location = ['start_lat','start_lng','end_lat','end_lng','distance','number','street','side','city','county','state','zipcode','airport_code'];
+        const timeParameters = ['start_time','end_time','weather_timestamp','timezone','sunrise_sunset','civil_twilight','nautical_twilight','astronomical_twilight'];
+        const drivingParameters = ['amenity','bump','crossing','give_way','junction','no_exit','railway','roundabout','station','stop','traffic_calming','traffic_signal','turning_loop'];
+        const others = ['id','source','tmc','severity','description'];
+    function renderCategories(specificCategories){
+        var found;
+        for (var i = 0; i < categories.length; i++) {
+            found = false;
+            for (var j = 0; j < specificCategories.length; j++) {
+                if(categories[i].key === specificCategories[j]){
+                    found = true;
+                }
+            }
+        if(found){
+        if(categories[i].category_type === 'simple'){ %>
+        <button class="dropdown-btn"><%= categories[i].key.replace('_',' ')%>
+            <i class="fa fa-caret-down"></i>    </button>
+        <div class="dropdown-container">
+            <% for (var j = 0; j < categories[i].values.length; j++) {%>
+                <%- include('simpleCategory',{category: categories[i].key, value: categories[i].values[j], count:categories[i].count[j]}); -%>
+            <% }%>
+        </div>
+    <%} else if(categories[i].category_type === 'dropdown'){ %>
+        <button class="dropdown-btn"><%= categories[i].key.replace('_',' ')%>
+            <i class="fa fa-caret-down"></i>    </button>
+        <div class="dropdown-container">
+            <%- include('dropdownCategory',{category: categories[i].key}); -%>
+        </div>
+    <% } else if(categories[i].category_type === 'interval'){ %>
+        <button class="dropdown-btn"><%= categories[i].key.replace('_',' ')  %>
+            <i class="fa fa-caret-down"></i>    </button>
+        <div class="dropdown-container">
+            <%- include('intervalCategory',{intervalObj: categories[i]}); -%>
+        </div>
+    <% } else if(categories[i].category_type === 'explicit'){ %>
+        <button class="dropdown-btn"><%= categories[i].key.replace('_',' ')  %>
+            <i class="fa fa-caret-down"></i>    </button>
+        <div class="dropdown-container">
+            <%- include('explicitCategory',{category: categories[i].key}); -%>
+        </div>
+    <% }}}}%>
+    <button class="dropdown-btn">Weather conditions
+        <i class="fa fa-caret-down"></i>    </button>
+    <div class="dropdown-container">
+        <%= renderCategories(weatherConditions)%>
+    </div>
+
+    <button class="dropdown-btn">Location
+        <i class="fa fa-caret-down"></i>
+    </button>
+     <div class="dropdown-container">
+         <%= renderCategories(location)%>
+    </div>
+
+    <button class="dropdown-btn">Time Parameters
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <%= renderCategories(timeParameters)%>
+    </div>
+
+    <button class="dropdown-btn">Driving Parameters
+        <i class="fa fa-caret-down"></i>
+    </button>
+
+    <div class="dropdown-container">
+        <%= renderCategories(drivingParameters)%>
+    </div>
+    <button class="dropdown-btn">Others
+        <i class="fa fa-caret-down"></i>
+    </button>
+
+    <div class="dropdown-container">
+        <%= renderCategories(others)%>
+    </div>
+</div>
+<script src="javascript/choicebar.js"></script>
+
+
+
+
+
+
+

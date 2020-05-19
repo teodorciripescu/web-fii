@@ -1,7 +1,7 @@
 const url = require('url');
-const {suggestion} = require('../../models');
+const {suggestion} = require('../../../models');
 
-exports.suggestion = async (req, res) => {
+module.exports = async (req, res) => {
     console.log('hi');
     const url_parts = url.parse(req.url, true);
     const params = url_parts.query;

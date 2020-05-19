@@ -1,0 +1,65 @@
+.loading {
+    background-color: #ffffff;
+    background-image: url("http://loadinggif.com/images/image-selection/3.gif");
+    background-size: 15px 15px;
+    background-position:right center;
+    background-repeat: no-repeat;
+}
+.search-container {
+    display: flex;
+    flex-direction:column;
+}
+.search-container-item {
+    flex:1;
+}
+.search-container-item * {
+    width: 90%;
+    margin-bottom: 5px;
+}
+
+input[type=text] {
+    text-align: center;
+}
+/*labels*/
+.label-container{
+    display: flex;
+    flex-wrap: wrap; /* wrap on multiple lines if necessary */
+}
+.chosen-option-label {
+    color: white;
+    padding: 8px;
+    margin: 3px;
+    border-radius: 25px;
+}
+.color-simple {background-color: #4CAF50;} /* Green */
+.color-dropdown {background-color: #2196F3;} /* Blue */
+.color-interval {background-color: #ff9800;} /* Orange */
+.color-explicit {background-color: #f44336;} /* Red */
+
+.remove-label {
+    cursor: pointer;
+    padding: 2px 4px;
+    margin-right: 2px;
+    border-radius: 25px;
+}
+.remove-label:hover {
+    background-color: #eee;
+    color: black;
+    opacity: 0.5;
+}
+input[type=button] {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+
+}
+.send-button-container{
+    display: flex;
+    justify-content: center;
+}
+.send-button {
+    width: 33%;
+    margin: 10px;
+}

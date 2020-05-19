@@ -1,0 +1,13 @@
+<div class="search-container">
+    <div class="search-container-item">
+        <select id="<%= category + 'Select'  %>" onchange="selectedDropdown('<%= category%>', '<%= category + 'Select'%>')">
+            <option id="<%= category + 'SelectOption'  %>" value="no data">no data</option>
+        </select>
+    </div>
+    <div class="search-container-item">
+        <input type="text" id="<%= category + 'Input' %>" name="category">
+    </div>
+    <div class="search-container-item">
+        <input type="button" onclick="loadSuggestions('<%= category%>','<%= category + 'Input'%>','<%= category + 'Select'%>')" value="Search"/>
+    </div>
+</div>

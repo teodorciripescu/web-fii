@@ -6,11 +6,14 @@ module.exports = function(){
             req.on('data', (chunk) => {
                 body.push(chunk);
             }).on('end', () => {
-
-                    body = JSON.parse(body.toString());
-                    req.body = body;
-                    next();
-
+                    try{
+                        body = JSON.parse(body.toString());
+                        req.body = body;
+                        next();
+                    } catch(e){
+                        req.body = {error:e};
+                        next();
+                    }
             });
             }catch (e) {
                 req.body = {};

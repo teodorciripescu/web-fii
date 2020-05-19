@@ -21,8 +21,8 @@ router.use(serveStatic(path.join(__dirname, 'public'),{
 }));
 function setHeaders(res, path){
     const mimeType = mime.getType(path);
-    console.log(mimeType);
-    res.setHeader('Content-Type', mimeType); // Sets the header to 'text/html'
+    //console.log(mimeType);
+    res.setHeader('Content-Type', mimeType);
 }
 
 

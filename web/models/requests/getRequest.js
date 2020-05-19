@@ -5,7 +5,6 @@ module.exports = function(options){
         try{
             let data = '';
             const req = http.request(options, res => {
-                console.log(`statusCode: ${res.statusCode}`);
                 res.on('data', chunk => {
                     data += chunk;
                 });
