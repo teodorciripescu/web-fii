@@ -16,6 +16,11 @@ router.get('/', function (req, res) {
 
 const auth = require('./auth');
 router.use('/auth',auth);
+
 const categories = require('./categories');
 router.use('/categories', categories);
+
+const dataQueries = require('./dataQueries');
+router.use('/data_queries', dataQueries);
+
 module.exports = router;

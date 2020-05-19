@@ -1,0 +1,1 @@
+exports.getChartData = require('./getChartData');

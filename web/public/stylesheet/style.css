@@ -1,2 +1,33 @@
-body {background-color: white;}
-h1 {color:blue;}
+body{
+    margin:0;
+}
+
+@media(min-width: 768px){
+    html, body, .flex {
+        height: 100%;
+    }
+    .flex {
+        display: flex;
+        flex-direction: row;
+    }
+
+}
+@media(max-width: 768px){
+    .flex {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+.flex-element-choicebar {
+    flex: 2;
+    /*border-style: solid;*/
+    /*border-color: red;*/
+}
+.flex-element-display {
+    flex:8;
+    padding: 15px;
+    /*border-style: solid;*/
+    /*border-color: green;*/
+}
