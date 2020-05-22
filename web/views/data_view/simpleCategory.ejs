@@ -1,5 +1,7 @@
-<label class="container">
+<div class="container">
     <div class="choice_parameter"><%= `${value} (${count})` %></div>
+    <label>
     <input class="choice_input" type="checkbox" id="<%= value + category + 'Checkbox'%>" onclick="selectedSimple('<%= category %>', '<%= value %>')">
     <span class="checkmark"></span>
-</label>
+    </label>
+</div>

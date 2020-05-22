@@ -6,16 +6,16 @@ function selectedExplicit(category, inputId) {
         value: selectedValue
     }
     if(!removeExplicitChosenOption(obj)) {
-        chosenOptions.push(obj);
+        chosenOptions[currentLine].push(obj);
         loadChosenOptionLabels();
     }
 }
 
 function removeExplicitChosenOption(obj){
-    for (let i = 0; i < chosenOptions.length; i++) {
-        if(obj.key ===chosenOptions[i].key
-            && obj.value === chosenOptions[i].value){
-            chosenOptions.splice(i, 1);
+    for (let i = 0; i < chosenOptions[currentLine].length; i++) {
+        if(obj.key ===chosenOptions[currentLine][i].key
+            && obj.value === chosenOptions[currentLine][i].value){
+            chosenOptions[currentLine].splice(i, 1);
             return true;
         }
     }

@@ -24,6 +24,7 @@ input[type=text] {
 .label-container{
     display: flex;
     flex-wrap: wrap; /* wrap on multiple lines if necessary */
+    justify-content: left;
 }
 .chosen-option-label {
     color: white;
@@ -31,6 +32,7 @@ input[type=text] {
     margin: 3px;
     border-radius: 25px;
 }
+
 .color-simple {background-color: #4CAF50;} /* Green */
 .color-dropdown {background-color: #2196F3;} /* Blue */
 .color-interval {background-color: #ff9800;} /* Orange */
@@ -50,16 +52,60 @@ input[type=text] {
 input[type=button] {
     background-color: #008CBA;
     border: none;
+    border-radius: 8px;
     color: white;
     padding: 8px 16px;
     cursor: pointer;
-
+}
+input[type=button]:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
 }
 .send-button-container{
     display: flex;
+    flex-wrap: wrap; /* wrap on multiple lines if necessary */
     justify-content: center;
 }
 .send-button {
-    width: 33%;
+    font-size: 20px;
     margin: 10px;
+}
+
+.add-line-button {
+    font-size: 14px;
+    margin: 10px;
+    background-color: #4CAF50!important;
+}
+
+.reset-button {
+    font-size: 14px;
+    margin: 10px;
+    background-color: #f44336!important;
+}
+
+.select-representation {
+    margin: 10px;
+    font-size: 14px;
+}
+
+.export-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 3px;
+    background-color: #C0C0C0!important;
+}
+
+.chart-container{
+    display: flex;
+}
+
+.chart-item{
+    width: 100%;
+}
+
+.chart-specific-options{
+    display: flex;
+    flex-wrap: wrap;
 }

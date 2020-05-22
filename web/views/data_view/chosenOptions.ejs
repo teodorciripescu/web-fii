@@ -1,6 +1,25 @@
-<div class="label-container" id="chosenOptionsLabels">
-</div>
-
 <div class="send-button-container" id="sendDataContainer">
-    <input class="send-button" type="button" value="Load Chart" onclick="sendOptions()">
+    <select id="chartTypeSelect" class="select-representation" onchange="chartTypeChanged()">
+        <option  value="Calendar Chart">Calendar Chart</option>
+        <option  value="Line Chart">Line Chart</option>
+    </select>
+    <input class="send-button" id="sendDataButton" type="button" value="Load Chart" onclick="drawChart()">
+
+    <input class="export-button" type="button" id="exportCsv" value="CSV" onclick="exportCsv()" disabled="true">
+    <input class="export-button" type="button" id="exportPng" value="PNG" onclick="exportPng()" disabled="true">
+    <input class="export-button" type="button" id="exportSvg" value="SVG" onclick="exportSvg()" disabled="true">
+</div>
+<div class="chart-specific-options" >
+    <input class="reset-button" type="button" id="resetButton" value="Reset" onclick="resetAllLines()">
+    <input class="add-line-button" type="button" id="addLineButton" value="Add Line" onclick="addLine()">
+    <select id="lineSelect" class="select-representation" onchange="lineChanged()">
+        <option  value="0">Line 1</option>
+    </select>
+</div>
+<div class="chart-specific-options" id="chartSpecificOptions">
+
+</div>
+<!--<div><h4> Y axis: </h4></div>-->
+<div class="label-container" id="chosenOptionsLabels">
+
 </div>

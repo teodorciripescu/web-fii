@@ -9,7 +9,7 @@ function selectedInterval(category, min, max) {
     };
     if(category==='start_time'||category==='end_time'||category==='weather_timestamp'){
         if(!removeIntervalChosenOption(obj)) {
-            chosenOptions.push(obj);
+            chosenOptions[currentLine].push(obj);
         }
         loadChosenOptionLabels();
     } else {
@@ -29,7 +29,7 @@ function selectedInterval(category, min, max) {
             }
             else{
                 if(!removeIntervalChosenOption(obj)) {
-                    chosenOptions.push(obj);
+                    chosenOptions[currentLine].push(obj);
                 }
                 loadChosenOptionLabels();
             }
@@ -37,10 +37,10 @@ function selectedInterval(category, min, max) {
     }
 }
 function removeIntervalChosenOption(obj){
-    for (let i = 0; i < chosenOptions.length; i++) {
-        if(obj.key ===chosenOptions[i].key
-            && obj.min === chosenOptions[i].min && obj.max === chosenOptions[i].max){
-            chosenOptions.splice(i, 1);
+    for (let i = 0; i < chosenOptions[currentLine].length; i++) {
+        if(obj.key ===chosenOptions[currentLine][i].key
+            && obj.min === chosenOptions[currentLine][i].min && obj.max === chosenOptions[currentLine][i].max){
+            chosenOptions[currentLine].splice(i, 1);
             return true;
         }
     }

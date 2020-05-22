@@ -8,7 +8,7 @@ module.exports = function(requestBody, options){
             var response = '';
 
             const req = http.request(options, res => {
-                console.log(`statusCode: ${res.statusCode}`);
+                //console.log(`statusCode: ${res.statusCode}`);
                 //console.log(res);
                 res.on('data', chunk => {
                     response += chunk;
