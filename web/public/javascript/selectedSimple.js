@@ -9,7 +9,8 @@ function selectedSimple(category, value) {
 
     var checkBox = document.getElementById(value + category + 'Checkbox');
     if (checkBox.checked === true){
-        chosenOptions.push(obj);
+        removeSimpleChosenOption(obj);
+        chosenOptions[currentLine].push(obj);
         loadChosenOptionLabels();
     } else {
         removeSimpleChosenOption(obj);
@@ -17,10 +18,29 @@ function selectedSimple(category, value) {
     }
 }
 function removeSimpleChosenOption(obj){
-    for (let i = 0; i < chosenOptions.length; i++) {
-        if(obj.key ===chosenOptions[i].key && obj.value === chosenOptions[i].value){
-            chosenOptions.splice(i, 1);
+    for (let i = 0; i < chosenOptions[currentLine].length; i++) {
+        if(obj.key ===chosenOptions[currentLine][i].key && obj.value === chosenOptions[currentLine][i].value){
+            chosenOptions[currentLine].splice(i, 1);
             return;
+        }
+    }
+}
+
+function lineChangedSelectChosenOptions(){
+    for (let i = 0; i < chosenOptions.length; i++) {
+        for (let j = 0; j < chosenOptions[i].length; j++) {
+            if(chosenOptions[i][j].category_type === 'simple'){
+                const checkboxId = chosenOptions[i][j].value + chosenOptions[i][j].key + 'Checkbox';
+                document.getElementById(checkboxId).checked = false;
+
+            }
+        }
+    }
+    for (let j = 0; j < chosenOptions[currentLine].length; j++) {
+        if(chosenOptions[currentLine][j].category_type === 'simple'){
+            const checkboxId = chosenOptions[currentLine][j].value + chosenOptions[currentLine][j].key + 'Checkbox';
+            document.getElementById(checkboxId).checked = true;
+
         }
     }
 }

@@ -11,7 +11,7 @@ module.exports = async function(optionsData){
             'Content-Type': 'application/json'
         }
     }
-    if(optionsData.length>=0){
+    if(optionsData.options.length>=0){
         result = await postRequest(optionsData, options);
     } else{
         result = {
