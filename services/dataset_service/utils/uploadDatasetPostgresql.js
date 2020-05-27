@@ -68,7 +68,7 @@ async function uploadDatasetSync() {
                                                 "$25,$26,$27,$28,$29,$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49)";
     var lineNmb = 0;let query;
     var data = [];
-    var s = fs.createReadStream('/Users/teodorciripescu/Downloads/US_Accidents_Dec19.csv')
+    var s = fs.createReadStream('/home/asttrid/Documents/US_Accidents_Dec19.csv')
         .pipe(es.split())
         .pipe(es.mapSync(async function (line) {
             // punem pauza la stream (nu se continua citirea din fisier)

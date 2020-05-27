@@ -20,9 +20,9 @@ function finalcredentials(){
         if(all_input[i].value!=""){
             nr++;
             credentials.push(all_input.value);
-           // console.log(all_input[i].value);
+            console.log(all_input[i].value);
         }
-        // else  console.log("null");
+         else  console.log("null");
 
     }
 

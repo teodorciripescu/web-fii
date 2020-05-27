@@ -1,0 +1,93 @@
+
+.dropdown {
+
+
+
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:active .dropdown-content {
+    display: block;
+
+}
+
+.dropbtn {
+
+    background-color:cornflowerblue;
+    font-family:American Typewriter, serif;
+    font-size: 16px;
+    color:#262635;
+    padding: 16px;
+
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content p:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #fff2a8;
+}
+
+.dropdown-content:checked{
+    background-color: #2196F3;
+}
+
+
+.principal{
+    width:600px;height:350px; background-color:antiquewhite;border-radius: 5px;
+    position:absolute;
+    left:30%;
+    top:30%;
+    transform: translate(-50%,-50%);
+}
+
+.buton{
+    left:600px; transform: translate(30%,40%);
+}
+.dptdown{
+    transform: translate(29%,17%);
+}
+.nume{
+    position:absolute;
+    left:25%;
+    top:46%;
+    transform: translate(-50%,-50%);
+}
+
+.parola {    position:absolute;
+    left:25%;
+    top:56%;
+    transform: translate(-50%,-50%);}
+.input_nume{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+}
+
+.input_parola{   position:absolute;
+    left:50%;
+    top:60%;
+    transform: translate(-50%,-50%);}

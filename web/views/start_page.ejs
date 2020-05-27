@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="loginpage.css">
+
+    <title> Dynamic DOM Elements </title>
+
+
+</head>
+<body>
+
+
+<div style="width:100%;height: 30%; background-color: #fff2a8" class="background">
+    <p style="width:100%;height: 300px;" >
+    <h1 style="color:antiquewhite; position:absolute;
+    left:50%;
+    top:10%;
+    transform: translate(-50%,-50%);
+    font-size: 130px;
+">avi</h1>
+</div>
+
+
+<div id="DynamicContent">
+    gghg
+</div>
+
+</body>
+<script>
+    var oContent = document.getElementById('DynamicContent');
+    //url pt pagina care furnizeaza asta
+    var cURL     = 'http://localhost:63342/untitled/stylesheet/start_page.html?_ijt=o5h0ftv4pc22mv2f2i57l6sk9v'
+    oContent.innerHTML = aaSubmitURL(cURL, "@GET", "");
+    console.log(oContent);
+
+    ///cream div nou
+    var newDiv = document.createElement('div');
+    //legare
+    document.body.appendChild(newDiv);
+    ///eventuale modificari aspect
+    newDiv.style.width = "500px";
+    newDiv.style.height = "500px";
+    newDiv.style.background = "#77a4d4";
+    newDiv.style.borderStyle = "solid";
+    newDiv.style.borderWidth = "1px";
+
+    newDiv.innerText='sdagdsgfa';
+
+
+
+</script>
+</html>

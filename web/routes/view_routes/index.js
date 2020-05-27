@@ -12,4 +12,7 @@ router.get('/', mainPageController);
 const auth = require('./auth');
 router.use('/',auth);
 
+const admin = require('./admin');
+router.use('/admin', admin);
+
 module.exports = router;
