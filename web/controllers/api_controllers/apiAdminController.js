@@ -1,7 +1,7 @@
-const {login} = require('../../models');
+const {adminLogin} = require('../../models');
 
 exports.login = async (req, res) => {
-    const obj = await login(req.body);
+    const obj = await adminLogin(req.body);
     console.log(obj);
     res.statusCode = obj.status;
 

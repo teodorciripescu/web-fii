@@ -3,5 +3,5 @@ module.exports=function (req, res, next) {
         res.statusCode = 400;
         res.end(JSON.stringify({success: false, message: "Body is empty."}));
     }
-    next().then();
+    next();
 };

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page AVI</title>
-    <link rel="stylesheet" href="stylesheet/loginpage.css">
+    <link rel="stylesheet" href="../stylesheet/loginpage.css">
 
 </head>
 <body class="background">
@@ -52,46 +52,92 @@
     var btn = document.getElementById("Continua");
     btn.addEventListener("click", finalcredentials);
 
-    function finalcredentials(){
+    async function finalcredentials() {
 
         console.log("astrid");
-        credentials=[""];
+        credentials = [""];
 
-        var nr=0;
-        var all_input=document.getElementsByClassName("text_input");
+        var nr = 0;
+        var all_input = document.getElementsByClassName("text_input");
 
-        for(i=0;i<all_input.length;i++){
-            if(all_input[i].value!=""){
+        for (i = 0; i < all_input.length; i++) {
+            if (all_input[i].value != "") {
                 nr++;
-                credentials.push(all_input.value);
+                credentials.push(all_input[i].value);
                 console.log(all_input[i].value);
-            }
-            else  console.log("null");
+            } else console.log("null");
 
 
         }
 
-        if(nr!==2)alert("Nu ati introdus toate datele.\n Incercati din nou.");
-        else{
+        if (nr !== 2) alert("Nu ati introdus toate datele.\n Incercati din nou.");
+        else {
             console.log("cred:");
-            if(valid()) {
+            let ok = await valid();
+            console.log(ok);
+            if (ok) {
+                console.log("am intrat");
                 location.replace("http://localhost:3000/admin/manager");
+                console.log("redirectam acum");
+            } else {
+                console.log("here");
+                location.replace("http://localhost:3000/admin");
             }
         }
     }
 
-    function valid(){
-        var ok=0;
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            //    document.getElementById("demo").innerHTML = this.responseText;
-                ok=1;
-            }
+    async function valid() {
+
+        /*  var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+              //    document.getElementById("demo").innerHTML = this.responseText;
+                  ok=1;
+              }
+          };
+          xhttp.open("GET", "ajax_info.txt", true);
+          xhttp.send();*/
+        console.log("credentials0:"+ credentials[1]);
+        console.log("credentials1:"+ credentials[2]);
+        /*let boddy = JSON.stringify({
+            "username": credentials[1],
+            "password": credentials[2]});
+        console.log(boddy);
+        ok = await fetch("http://localhost:4500/login", {method : "POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body : boddy});*/
+     //  var bdul="{username:ada"
+
+        /*ok = await fetch("http://localhost:4500/login", {method : "POST",
+
+            body :
+
+                {
+                "username": credentials[1],
+                "password": credentials[2]}
+        });*/
+
+        var myHeaders = new Headers();
+       // myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({ "username": credentials[1],
+            "password": credentials[2]});
+
+        var requestOptions = {
+            method: 'POST',
+         //   headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
         };
-        xhttp.open("GET", "ajax_info.txt", true);
-        xhttp.send();
-      return ok;
+
+        var ok = await fetch("http://localhost:3000/api/admin/login", requestOptions)
+            .catch(error => console.log('error', error));
+
+        console.log(ok.ok);
+        //console.log(ok.success);
+        return ok.ok;
     }
 
 

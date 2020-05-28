@@ -7,3 +7,4 @@ exports.viewAuthController = require('./view_controllers/viewAuthController');
 exports.mainPageController = require('./view_controllers/mainPageController');
 
 exports.adminViewController = require('./view_controllers/adminController');
+exports.apiAdminController=require('./api_controllers/apiAdminController');

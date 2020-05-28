@@ -5,3 +5,5 @@ exports.suggestion = require('./categories/suggestion');
 exports.getCategories = require('./categories/getCategories');
 
 exports.getChartData = require('./data_queries/getChartData');
+
+exports.adminLogin=require('./admin/login');

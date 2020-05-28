@@ -11,7 +11,7 @@ router.use(set_headers.forApi());
 router.use(empty_body);
 
 
-router.get('/', loginController);
+router.post('/login', loginController);
 router.get('/manager', optionsController);
 /*
 
