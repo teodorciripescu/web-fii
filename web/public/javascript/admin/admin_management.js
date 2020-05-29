@@ -46,3 +46,31 @@ btn.addEventListener("click", function(){
 
         }}
     else {alert("alegerea unei operatii este obligatorie!"); }});
+
+
+
+async function valid() {
+
+    console.log("credentials0:"+ credentials[1]);
+    console.log("credentials1:"+ credentials[2]);
+
+    var myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({ "username": credentials[1],
+        "password": credentials[2]});
+
+    var requestOptions = {
+        method: 'POST',
+        //   headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    var ok = await fetch("http://localhost:3000/api/admin/internal", requestOptions)
+        .catch(error => console.log('error', error));
+
+    console.log(ok.ok);
+    //console.log(ok.success);
+    return ok.ok;
+}
