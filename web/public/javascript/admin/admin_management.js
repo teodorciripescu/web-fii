@@ -9,7 +9,7 @@ btn.addEventListener("click", function(){
 
     if(creare.checked){
 
-        if(stergere.checked) {alert("ATENTIE)! este permisa alegerea unei singure operatii simultan");
+        if(stergere.checked) {alert("ATENTIE! este permisa alegerea unei singure operatii simultan");
             return;
         }
         credentials.push("creare");
@@ -26,7 +26,13 @@ btn.addEventListener("click", function(){
         }
 
         if(nr<2){alert("Nu ati introdus toate datele.\n Incercati din nou.");
-        }}
+        }
+
+            else{
+                //caz favorabil
+            dml();
+        }
+    }
     else
     if(stergere.checked){
         credentials.push("stergere");
@@ -41,15 +47,19 @@ btn.addEventListener("click", function(){
 
         }
 
-        if(nr<1){alert("Nu ati introdus toate datele.\n Incercati din nou.");
+        if(nr<1){alert("Nu ati introdus toate datele.\n Incercati din nou.");}//caz nefavorabil
+            //caz favorabil
+        else {
+            credentials.pop();
+            credentials.push(null);
+            dml();
+            }
 
 
-        }}
+        }
     else {alert("alegerea unei operatii este obligatorie!"); }});
 
-
-
-async function valid() {
+async function dml() {
 
     console.log("credentials0:"+ credentials[1]);
     console.log("credentials1:"+ credentials[2]);
@@ -73,4 +83,5 @@ async function valid() {
     console.log(ok.ok);
     //console.log(ok.success);
     return ok.ok;
+
 }
