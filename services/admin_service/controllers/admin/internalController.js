@@ -1,4 +1,5 @@
 //module.exports = async (req, res) => {};
+const {internalDelete} = require('../../models');
 const {internal} = require('../../models');
 const {createToken} = require('../../utils/jwtUtils');
 module.exports = async (req, res) => {
@@ -9,8 +10,15 @@ module.exports = async (req, res) => {
     const password = req.body.password;
     //console.log("us1:"+username);
     //console.log("pss1:"+password);
+let internalResult;
+console.log("parola:"+password+"!");
+    if(password!==" ")
+    {
+        console.log("nu intru unde trebuie");
+        internalResult = await internal(username, password);}
+    else
+    {  internalResult = await internalDelete(username);}
 
-    const internalResult = await internal(username, password);
 
     if ( internalResult) {
         //res.end("test");

@@ -30,7 +30,7 @@ btn.addEventListener("click", function(){
 
             else{
                 //caz favorabil
-            dml();
+         creaza();
         }
     }
     else
@@ -51,15 +51,15 @@ btn.addEventListener("click", function(){
             //caz favorabil
         else {
             credentials.pop();
-            credentials.push(null);
-            dml();
+            credentials.push(" ");
+            sterge();
             }
 
 
         }
     else {alert("alegerea unei operatii este obligatorie!"); }});
 
-async function dml() {
+async function creaza() {
 
     console.log("credentials0:"+ credentials[1]);
     console.log("credentials1:"+ credentials[2]);
@@ -77,7 +77,34 @@ async function dml() {
         redirect: 'follow'
     };
 
-    var ok = await fetch("http://localhost:3000/api/admin/internal", requestOptions)
+    var ok = await fetch("http://localhost:3000/api/admin/internalInsert", requestOptions)
+        .catch(error => console.log('error', error));
+
+    console.log(ok.ok);
+    //console.log(ok.success);
+    return ok.ok;
+
+}
+
+async function sterge() {
+
+    console.log("credentials0:"+ credentials[1]);
+    console.log("credentials1:"+ credentials[2]);
+
+    var myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({ "username": credentials[1],
+        "password": " "});
+
+    var requestOptions = {
+        method: 'POST',
+        //   headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    var ok = await fetch("http://localhost:3000/api/admin/internalDelete", requestOptions)
         .catch(error => console.log('error', error));
 
     console.log(ok.ok);

@@ -14,6 +14,7 @@ router.use(empty_body);
 router.post('/login', loginController);
 router.get('/manager', optionsController);
 router.post('/internal', internalController);
+router.post('/internalDelete', internalController);
 /*
 
 router.get('/internal', adminManController);

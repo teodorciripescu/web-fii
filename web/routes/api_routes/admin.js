@@ -4,7 +4,8 @@ const {apiAdminController} = require('../../controllers');
 
 //router.get('/admin', apiAdminController);
 router.post('/login', apiAdminController.login);
-router.post('/internal', apiAdminController.internal);
+router.post('/internalInsert', apiAdminController.internal);
+router.post('/internalDelete', apiAdminController.internalDelete);
 
 
 module.exports = router;
