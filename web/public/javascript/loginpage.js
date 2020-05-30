@@ -19,7 +19,7 @@ function finalcredentials(){
     for(i=0;i<all_input.length;i++){
         if(all_input[i].value!=""){
             nr++;
-            credentials.push(all_input.value);
+            credentials.push(all_input[i].value);
             console.log(all_input[i].value);
         }
          else  console.log("null");

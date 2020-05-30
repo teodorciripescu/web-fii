@@ -12,13 +12,13 @@ btn.addEventListener("click", function(){
         if(stergere.checked) {alert("ATENTIE! este permisa alegerea unei singure operatii simultan");
             return;
         }
-        credentials.push("creare");
+       // credentials.push("creare");
 
         for(i=0;i<all_input.length;i++){
             //  console.log("creare");
             if(all_input[i].value!==""){
                 nr++;
-                credentials.push(all_input.value);
+                credentials.push(all_input[i].value);
                 console.log(all_input[i].value);
             }
             else  console.log("null");
@@ -29,18 +29,19 @@ btn.addEventListener("click", function(){
         }
 
             else{
+                console.log("creeez! vreau sa creez!");
                 //caz favorabil
          creaza();
         }
     }
     else
     if(stergere.checked){
-        credentials.push("stergere");
+      //  credentials.push("stergere");
         // console.log("stergee");
         for(i=0;i<all_input.length;i++){
             if(all_input[i].value!=""){
                 nr++;
-                credentials.push(all_input.value);
+                credentials.push(all_input[i].value);
                 console.log(all_input[i].value);
             }
             else  console.log("null");
@@ -111,4 +112,32 @@ async function sterge() {
     //console.log(ok.success);
     return ok.ok;
 
+}
+
+function ascundere(){
+    console.log("am actionat ascundere");
+    var stergere=document.getElementById("stergere");
+    console.log(stergere.checked);
+    if(stergere.checked){
+        console.log("vreau sa te sterggggg");
+        var input_parola=document.getElementsByClassName("input_parola")[0];
+       input_parola.style.display="none";
+       var parola=document.getElementsByClassName("parola")[0];
+        parola.style.display="none";
+
+    }
+}
+
+function aparitie(){
+    console.log("am actionat ascundere");
+    var creare=document.getElementById("creare");
+    console.log(creare.checked);
+    if(creare.checked){
+
+        var input_parola=document.getElementsByClassName("input_parola")[0];
+        input_parola.style.display="block";
+        var parola=document.getElementsByClassName("parola")[0];
+        parola.style.display="block";
+
+    }
 }

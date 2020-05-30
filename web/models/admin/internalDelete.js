@@ -11,7 +11,7 @@ module.exports = async function(internalData){
             'Content-Type': 'application/json'
         }
     };
-    if(internalData.username && internalData.password){
+    if(internalData.username){
         result = await postRequest(internalData, options);
     } else{
         result = {
