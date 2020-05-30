@@ -51,7 +51,7 @@ btn.addEventListener("click", function(){
         if(nr<1){alert("Nu ati introdus toate datele.\n Incercati din nou.");}//caz nefavorabil
             //caz favorabil
         else {
-            credentials.pop();
+           // credentials.pop();
             credentials.push(" ");
             sterge();
             }
