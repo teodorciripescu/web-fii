@@ -99,25 +99,7 @@
           xhttp.send();*/
         console.log("credentials0:"+ credentials[1]);
         console.log("credentials1:"+ credentials[2]);
-        /*let boddy = JSON.stringify({
-            "username": credentials[1],
-            "password": credentials[2]});
-        console.log(boddy);
-        ok = await fetch("http://localhost:4500/login", {method : "POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body : boddy});*/
-     //  var bdul="{username:ada"
 
-        /*ok = await fetch("http://localhost:4500/login", {method : "POST",
-
-            body :
-
-                {
-                "username": credentials[1],
-                "password": credentials[2]}
-        });*/
 
         var myHeaders = new Headers();
        // myHeaders.append("Content-Type", "application/json");
@@ -135,19 +117,21 @@
         var ok = await fetch("http://localhost:3000/api/admin/login", requestOptions)
             .catch(error => console.log('error', error));
 
+
+      await ok.json().then(data=>{
+
+          let tokenul=data.token;
+
+          document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
+      });
+
+   /*   console.log(tokenul);
+        document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
+*/
         console.log(ok.ok);
         //console.log(ok.success);
         return ok.ok;
     }
-
-
-/*
-    function redirectOptions() {
-        console.log("cred:");
-        location.replace("http://localhost:3000/admin/manager");
-
-    }*/
-
 
 
 

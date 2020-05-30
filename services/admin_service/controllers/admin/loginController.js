@@ -1,5 +1,6 @@
 const {login} = require('../../models');
 const {createToken} = require('../../utils/jwtUtils');
+
 module.exports = async (req, res) => {
 
     //console.log("something");
@@ -10,19 +11,32 @@ module.exports = async (req, res) => {
     //console.log("pss1:"+password);
 
     const loginResult = await login(username, password);
-    //console.log("login: " + loginResult);
-///const loginResult=1;
-    //res.statusCode = 200;
-    //return res.end(JSON.stringify({message:'mergi odata', loginResult}));
-    //return;
+
     if (loginResult) {
-        //res.end("test");
-        //console.log("sunt in loginresult ==1:");
         const tokenPayload = {
-           // id: loginResult,
+
             username: username
         };
         const token = await createToken(tokenPayload ,process.env.JWT_SECRET);
+
+ /*       res.writeHead(200, {
+            'Set-Cookie':'token='+token+'; expires='+new Date(new Date().getTime()+86409000).toUTCString()
+        });*/
+//////////////////////////////////
+    /*    http.createServer(function (request, response) {
+
+      */      // To Read a Cookie
+     ////       var cookies = parseCookies(request);
+
+            // To Write a Cookie
+            res.writeHead(200, {
+                'Set-Cookie':'token='+token+'; expires='+new Date(new Date().getTime()+86409000).toUTCString(),
+                'Content-Type': 'text/plain'
+            });
+  /*          res.end('Hello World\n');
+        }).listen(4500);*/
+
+///////////////////////////
         const obj = {success: true, status:200, message: 'You logged in successfully!', token, user: tokenPayload};
         console.log(JSON.stringify(obj));
         res.statusCode = 200;
