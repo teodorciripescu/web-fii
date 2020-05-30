@@ -81,7 +81,14 @@ async function creaza() {
     var ok = await fetch("http://localhost:3000/api/admin/internalInsert", requestOptions)
         .catch(error => console.log('error', error));
 
+ /*   console.log(ok);
     console.log(ok.ok);
+    console.log("aici");*/
+  //  console.log(ok);
+   // console.log(ok.json);
+    let k=ok.json().then(data=>{alert(data.message)});
+    console.log(k);
+   // alert();
     //console.log(ok.success);
     return ok.ok;
 
@@ -108,8 +115,8 @@ async function sterge() {
     var ok = await fetch("http://localhost:3000/api/admin/internalDelete", requestOptions)
         .catch(error => console.log('error', error));
 
-    console.log(ok.ok);
-    //console.log(ok.success);
+
+    let k=ok.json().then(data=>{alert(data.message)});
     return ok.ok;
 
 }

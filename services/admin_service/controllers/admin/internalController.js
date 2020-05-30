@@ -3,6 +3,7 @@ const {internalDelete} = require('../../models');
 const {internal} = require('../../models');
 const {createToken} = require('../../utils/jwtUtils');
 module.exports = async (req, res) => {
+    let ok=0;
 
     //console.log("something");
 
@@ -15,9 +16,12 @@ console.log("parola:"+password+"!");
     if(password!==" ")
     {
         console.log("nu intru unde trebuie");
-        internalResult = await internal(username, password);}
+        internalResult = await internal(username, password);
+    ok=1;
+    }
     else
-    {  internalResult = await internalDelete(username);}
+    {  internalResult = await internalDelete(username);
+    ok=2;}
 
 
     if ( internalResult) {
@@ -28,7 +32,13 @@ console.log("parola:"+password+"!");
             username: username
         };
         const token = await createToken(tokenPayload ,process.env.JWT_SECRET);
-        const obj = {success: true, status:200, message: 'You logged in successfully!', token, user: tokenPayload};
+
+        let obj;
+        if(ok==1)
+        obj = {success: true, status:200, message: 'Your admin creation is successfully!', token, user: tokenPayload};
+        else if(ok==2)
+        obj = {success: true, status:200, message: 'Your admin deleting is successfully!', token, user: tokenPayload};
+
         console.log(JSON.stringify(obj));
         res.statusCode = 200;
         console.log(obj);
@@ -37,7 +47,11 @@ console.log("parola:"+password+"!");
 
 
     } else {
-        const obj = {success: false, status:401, message: 'Login failed.'};
+        let obj;
+        if(ok==1)
+            obj = {success: false, status:401, message: 'Your admin creation failed. - The username you have inserted already exists in database.'};
+            else if(ok==2)
+                obj = {success: false, status:401, message: 'Your admin deleting failed.- The account you tried to delete is not an existing account.'};
         res.statusCode = 401; //Unauthorized
 
         res.additionalHeaders = {"Access-Control-Allow-Origin": "*",

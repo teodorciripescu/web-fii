@@ -4,23 +4,27 @@ const db = require('./connection');
 
 
 module.exports = async function(username){
-    let res, sql, conn;
+    let res, sql,sql0, conn,res0;
 
+       sql0="select count(*) from admins where username=$1";
         sql="delete from admins where username=$1";
 
-    //sql = "SELECT count(*) FROM admins WHERE username='ada' and password='stefy' ";
-    //  sql = "SELECT count(*) FROM admins WHERE username=$1 and password=$2 ";
     try {
         conn = await db.connect();
-        //res = await conn.query(sql);
 
-            res = await conn.query(sql,[username]);
 
-        console.log("us:"+username);
+       res0=await conn.query(sql0,[username]);
+       res = await conn.query(sql,[username]);
 
-        console.log("res:"+res);
-        res = extractValues(res);
-        console.log("res2:"+res);
+
+        res0=extractValues(res0);
+        res=res0;
+        console.log(res0);
+
+        console.log(res[0]);
+
+
+        console.log("res2:"+res[0]);
     } catch (err) {
         console.log(err);
         res = err;
@@ -28,7 +32,7 @@ module.exports = async function(username){
         conn.done();
     }
     //console.log('--->',JSON.stringify(res));
-    res[0]='1';
+
     return res[0] === '1';
 };
 
