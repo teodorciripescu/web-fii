@@ -42,7 +42,8 @@
     <textarea style="height:400px;width:500px; position:absolute;
             left:50%;
             top:50%;
-            transform: translate(-50%,-50%); " >
+            transform: translate(-50%,-50%); "
+    id="text"  >
 
     </textarea>
 
@@ -57,9 +58,56 @@
 
 </body>
 <script>
-    function myFunction() {
+    async function myFunction() {
+
+
+        var username="default";
+        ///username-ul urmeaza sa fie pasat prin cookie si apoi extras
+
+        var all_input = document.getElementById("text");
+        var msg ;
+
+        if (all_input.value !== "")
+            msg=all_input.value;
+
+        console.log("astrid");
+        console.log(msg);
+        let ok = await legatura(username,msg);
+        console.log(ok);
+
 
     }
+
+
+    async function legatura(username,msg) {
+
+
+        var raw = JSON.stringify({"username":username, "message": msg});
+
+        var requestOptions = {
+            method: 'POST',
+            body: raw,
+            redirect: 'follow'
+        };
+
+        var ok = await fetch("http://localhost:3000/api/admin/posts", requestOptions)
+            .catch(error => console.log('error', error));
+
+
+/*        await ok.json().then(data=>{
+
+            let tokenul=data.token;
+
+            document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
+        });*/
+
+
+        console.log(ok);
+        console.log(ok.ok);
+        //console.log(ok.success);
+        return ok.ok;
+    }
+
 </script>
 
 
