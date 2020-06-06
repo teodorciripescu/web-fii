@@ -7,6 +7,6 @@ router.get('/', adminViewController.login);
 router.get('/manager', adminViewController.manager);
 router.get('/internal', adminViewController.internal);
 router.get('/posts', adminViewController.posts);
-router.get('/accid', adminViewController.accid);
+router.use('/accid', adminViewController.accid);
 
 module.exports = router;

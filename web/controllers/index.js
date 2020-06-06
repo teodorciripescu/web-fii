@@ -4,6 +4,7 @@ exports.apiCategoriesController = require('./api_controllers/categories/apiCateg
 exports.apiChartController = require('./api_controllers/data_queries/apiChartController');
 //exports.apiCategoriesController = require('./api_controllers/apiSuggestionsController');
 exports.viewAuthController = require('./view_controllers/viewAuthController');
+exports.viewAccidController = require('./view_controllers/viewAccidController');
 exports.mainPageController = require('./view_controllers/mainPageController');
 exports.startPageController = require('./view_controllers/startPageController');
 exports.apiStartController = require('./api_controllers/apiStartController');

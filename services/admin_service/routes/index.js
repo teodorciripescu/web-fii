@@ -1,7 +1,7 @@
 const Router = require('router');
 var router = Router();
 
-const {loginController, optionsController, internalController,accidManController,postsController} = require('../controllers');
+const {loginController, optionsController, internalController,accidController,postsController} = require('../controllers');
 //Middlewares
 const {body_parser, set_headers, empty_body} = require('../middlewares');
 
@@ -16,6 +16,7 @@ router.get('/manager', optionsController);
 router.post('/internal', internalController);
 router.post('/internalDelete', internalController);
 router.post('/posts', postsController);
+router.post('/accid', accidController);
 /*
 
 router.get('/internal', adminManController);

@@ -8,6 +8,7 @@ router.post('/posts', apiAdminController.posts);
 router.get('/manager', apiAdminController.manager);
 router.post('/internalInsert', apiAdminController.internal);
 router.post('/internalDelete', apiAdminController.internalDelete);
+router.post('/accid', apiAdminController.accid);
 
 
 module.exports = router;

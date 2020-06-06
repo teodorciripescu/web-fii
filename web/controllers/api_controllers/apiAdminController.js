@@ -1,7 +1,7 @@
 const {adminLogin} = require('../../models');
 const {adminInternal} = require('../../models');
 const {adminInternalDelete} = require('../../models');
-const {adminPosts} = require('../../models');
+const {adminPosts,adminAccid} = require('../../models');
 
 exports.login = async (req, res) => {
     const obj = await adminLogin(req.body);
@@ -39,6 +39,14 @@ exports.manager = async (req, res) => {
 
 exports.posts = async (req, res) => {
     const obj = await adminPosts(req.body);
+    console.log(obj);
+    res.statusCode = obj.status;
+
+    return res.end(JSON.stringify(obj));
+};
+
+exports.accid = async (req, res) => {
+    const obj = await adminAccid(req.body);
     console.log(obj);
     res.statusCode = obj.status;
 
