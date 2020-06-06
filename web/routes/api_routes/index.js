@@ -30,6 +30,9 @@ router.use('/data_queries', dataQueries);
 const admin = require('./admin');
 router.use('/admin', admin);
 
+const start = require('./start');
+router.use('/start', start);
+
 
 
 module.exports = router;

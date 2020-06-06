@@ -1,0 +1,1 @@
+exports.startController = require('./startController');

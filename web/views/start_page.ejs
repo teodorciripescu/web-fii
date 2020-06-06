@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="loginpage.css">
+    <link rel="stylesheet" href="../stylesheet/loginpage.css">
 
     <title> Dynamic DOM Elements </title>
 
@@ -32,22 +32,55 @@
 <script>
     var oContent = document.getElementById('DynamicContent');
     //url pt pagina care furnizeaza asta
-    var cURL     = 'http://localhost:63342/untitled/stylesheet/start_page.html?_ijt=o5h0ftv4pc22mv2f2i57l6sk9v'
-    oContent.innerHTML = aaSubmitURL(cURL, "@GET", "");
-    console.log(oContent);
+  //  var cURL     = 'http://localhost:3000/start'
 
-    ///cream div nou
-    var newDiv = document.createElement('div');
-    //legare
-    document.body.appendChild(newDiv);
-    ///eventuale modificari aspect
-    newDiv.style.width = "500px";
-    newDiv.style.height = "500px";
-    newDiv.style.background = "#77a4d4";
-    newDiv.style.borderStyle = "solid";
-    newDiv.style.borderWidth = "1px";
+    oContent.innerText='astrid';
 
-    newDiv.innerText='sdagdsgfa';
+   // oContent.innerText=;
+
+    legatura();
+    //console.log();
+
+
+    ///facem trimitere la baza de date -tabela: posts si extragem ultimele 10 postari si le afisam
+
+
+
+    async function legatura() {
+
+        ///mereu stergem tot ce era
+        oContent.innerHTML="";
+
+        //GET request- dorim optinerea posturilor din tabela
+        var ok = await fetch("http://localhost:3000/api/start")
+            .catch(error => console.log('error', error));
+
+
+        console.log(ok);
+        ok.json().then(x=> {
+           // console.log()
+            let obj=JSON.parse(x.data.rezultat);
+
+            for(let post of obj.posts)
+            {
+                console.log(post);
+
+                let paragraf=document.createElement("p");
+                paragraf.innerText=post;
+                paragraf.style.color="red";
+                oContent.appendChild(paragraf);
+            }
+
+
+
+        });
+        //console.log(ok.success);
+       // return ok.ok;
+    }
+
+
+
+
 
 
 

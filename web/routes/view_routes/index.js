@@ -9,6 +9,9 @@ router.use(set_headers.forPages());
 const {mainPageController} = require('../../controllers');
 router.get('/', mainPageController);
 
+const {startPageController} = require('../../controllers');
+router.get('/start', startPageController);
+
 const auth = require('./auth');
 router.use('/',auth);
 

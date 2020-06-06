@@ -1,9 +1,8 @@
 const render = require('../../utils/renderPage');
-//const {getCategories} = require('../../models');
 
 exports.login = async (req, res) => {
     res.statusCode = 200;
-    // const obj = await getCategories();
+
     const page = await render('./views/admin_view/adminpage.ejs', {});
     return res.end(page);
 };

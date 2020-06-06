@@ -11,3 +11,4 @@ exports.adminInternal=require('./admin/internal');
 exports.adminInternalDelete=require('./admin/internalDelete');
 exports.adminManager=require('./admin/manager');
 exports.adminPosts=require('./admin/posts');
+exports.start=require('./start');
