@@ -7,5 +7,11 @@ function drawChart(){
         case 'Line Chart':
             drawLineChart();
             break;
+        case 'Bar Chart':
+            drawBarChart();
+            break;
+        case 'Pie Chart':
+            drawPieChart();
+            break;
     }
 }

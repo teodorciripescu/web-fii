@@ -1,7 +1,9 @@
 <div class="send-button-container" id="sendDataContainer">
     <select id="chartTypeSelect" class="select-representation" onchange="chartTypeChanged()">
-        <option  value="Calendar Chart">Calendar Chart</option>
         <option  value="Line Chart">Line Chart</option>
+        <option  value="Bar Chart">Bar Chart</option>
+        <option  value="Calendar Chart">Calendar Chart</option>
+        <option  value="Pie Chart">Pie Chart</option>
     </select>
     <input class="send-button" id="sendDataButton" type="button" value="Load Chart" onclick="drawChart()">
 
@@ -9,7 +11,7 @@
     <input class="export-button" type="button" id="exportPng" value="PNG" onclick="exportPng()" disabled="true">
     <input class="export-button" type="button" id="exportSvg" value="SVG" onclick="exportSvg()" disabled="true">
 </div>
-<div class="chart-specific-options" >
+<div id="chartLineOptionsContainer" class="chart-specific-options" >
     <input class="reset-button" type="button" id="resetButton" value="Reset" onclick="resetAllLines()">
     <input class="add-line-button" type="button" id="addLineButton" value="Add Line" onclick="addLine()">
     <select id="lineSelect" class="select-representation" onchange="lineChanged()">
@@ -19,7 +21,12 @@
 <div class="chart-specific-options" id="chartSpecificOptions">
 
 </div>
-<!--<div><h4> Y axis: </h4></div>-->
+
 <div class="label-container" id="chosenOptionsLabels">
 
 </div>
+
+<script>
+    document.getElementById('chartSpecificOptions').innerHTML = getLineChartSpecificOptionsAsHtml();
+    drawChart();
+</script>

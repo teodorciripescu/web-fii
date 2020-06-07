@@ -12,4 +12,7 @@ router.get('/', mainPageController);
 const auth = require('./auth');
 router.use('/',auth);
 
+const statistics = require('./statistics');
+router.use('/statistics', statistics);
+
 module.exports = router;

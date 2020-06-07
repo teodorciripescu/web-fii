@@ -1,13 +1,13 @@
 var chartDataExport;
 
-function drawLineChart(){
+function drawPieChart(){
     disableExportButtons();
-    google.charts.load('current', {'packages':['line']});
+    google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(async function(){
         const chartInfo = {
             chart_type: 'line',
             x_axis: document.getElementById('xAxisSelect').value,
-            x_axis_option: document.getElementById('xAxisOptionsSelect').value
+            x_axis_option: null
         }
         var chartData = await sendOptions(chartInfo);
         chartDataExport = chartData;
@@ -29,27 +29,20 @@ function drawLineChart(){
         for (let i = 1; i < chartData[0].length; i++) {
             data.addColumn({ type: 'number', id: 'Accidents ' + i });
         }
-        //console.log('chart data ',chartData[chartData.length - 1]);
+        console.log(chartData[chartData.length - 1]);
         data.addRows(chartData);
 
         var options = {
-            chart: {
-                title: 'Accidents'
-            },
+            title: 'Accidents',
             width: computeChartWidth(),
-            height: computeChartWidth()/2,
-            axes: {
-                x: {
-                    0: {side: 'top'}
-                }
-            }
+            height: computeChartWidth()/2
         };
 
-        var chart = new google.charts.Line(document.getElementById('chart'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart'));
         google.visualization.events.addListener(chart, 'ready', function () {
             enableExportButtons();
         });
-        chart.draw(data, google.charts.Line.convertOptions(options));
+        chart.draw(data, options);
     });
 
 }
