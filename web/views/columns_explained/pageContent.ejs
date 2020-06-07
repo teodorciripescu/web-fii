@@ -1,0 +1,26 @@
+<%
+const columnNames = ['ID','Source','TMC','Severity','Start_Time','End_Time','Start_Lat','Start_Lng','End_Lat','End_Lng','Distance(mi)','Description','Number','Street','Side','City','County','State','Zipcode','Country','Timezone','Airport_Code','Weather_Timestamp','Temperature(F)','Wind_Chill(F)','Humidity(%)','Pressure(in)','Visibility(mi)','Wind_Direction','Wind_Speed(mph)','Precipitation(in)','Weather_Condition','Amenity','Bump','Crossing','Give_Way','Junction','No_Exit','Railway','Roundabout','Station','Stop','Traffic_Calming','Traffic_Signal','Turning_Loop','Sunrise_Sunset','Civil_Twilight','Nautical_Twilight','Astronomical_Twilight'];
+const columnDescriptions = ['This is a unique identifier of the accident record.','Indicates source of the accident report (i.e. the API which reported the accident.).','A traffic accident may have a Traffic Message Channel (TMC) code which provides more detailed description of the event.','Shows the severity of the accident, a number between 1 and 4, where 1 indicates the least impact on traffic (i.e., short delay as a result of the accident) and 4 indicates a significant impact on traffic (i.e., long delay).','Shows start time of the accident in local time zone.','Shows end time of the accident in local time zone.','Shows latitude in GPS coordinate of the start point.','Shows longitude in GPS coordinate of the start point.','Shows latitude in GPS coordinate of the end point.','Shows longitude in GPS coordinate of the end point.','The length of the road extent affected by the accident.','Shows natural language description of the accident.','Shows the street number in address field.','Shows the street name in address field.','Shows the relative side of the street (Right/Left) in address field.','Shows the city in address field.','Shows the county in address field.','Shows the state in address field.','Shows the zipcode in address field.','Shows the country in address field.','Shows timezone based on the location of the accident (eastern, central, etc.).','Denotes an airport-based weather station which is the closest one to location of the accident.','Shows the time-stamp of weather observation record (in local time).','Shows the temperature (in Fahrenheit).','Shows the wind chill (in Fahrenheit).','Shows the humidity (in percentage).','Shows the air pressure (in inches).','Shows visibility (in miles).','Shows wind direction.','Shows wind speed (in miles per hour).','Shows precipitation amount in inches, if there is any.','Shows the weather condition (rain, snow, thunderstorm, fog, etc.).','A Point-Of-Interest (POI) annotation which indicates presence of amenity in a nearby location.','A POI annotation which indicates presence of speed bump or hump in a nearby location.','A POI annotation which indicates presence of crossing in a nearby location.','A POI annotation which indicates presence of give_way sign in a nearby location.','A POI annotation which indicates presence of junction in a nearby location.','A POI annotation which indicates presence of no_exit sign in a nearby location.','A POI annotation which indicates presence of railway in a nearby location.','A POI annotation which indicates presence of roundabout in a nearby location.','A POI annotation which indicates presence of station (bus, train, etc.) in a nearby location.','A POI annotation which indicates presence of stop sign in a nearby location.','A POI annotation which indicates presence of traffic_calming means in a nearby location.','A POI annotation which indicates presence of traffic_signal in a nearby location.','A POI annotation which indicates presence of turning_loop in a nearby location.','Shows the period of day (i.e. day or night) based on sunrise/sunset.','Shows the period of day (i.e. day or night) based on civil twilight.','Shows the period of day (i.e. day or night) based on nautical twilight.','Shows the period of day (i.e. day or night) based on astronomical twilight.'];
+%>
+<div class="article-container">
+<h1>Columns Description</h1>
+<% for (var i = 0; i < columnNames.length; i++) { %>
+    <article class="article-container-item">
+        <header>
+            <h2><%= columnNames[i]%></h2>
+        </header>
+        <section>
+            <p><%= columnDescriptions[i]%></p>
+        </section>
+    </article>
+<% }%>
+    <article class="article-container-item">
+        <header>
+            <h3>More</h3>
+        </header>
+        <section>
+            <p>More information can be found <a href="https://www.kaggle.com/sobhanmoosavi/us-accidents#US_Accidents_Dec19.csv">here</a>. </p>
+        </section>
+    </article>
+</div>
+

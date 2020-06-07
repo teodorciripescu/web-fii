@@ -15,4 +15,7 @@ router.use('/',auth);
 const statistics = require('./statistics');
 router.use('/statistics', statistics);
 
+const columnsDescription = require('./columnsDescription');
+router.use('/columns', columnsDescription);
+
 module.exports = router;
