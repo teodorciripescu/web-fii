@@ -21,7 +21,7 @@
     }
 }
 .element-navbar a, .element-login-navbar a{
-    color:white
+    color:white;
 }
 .container-navbar div {
     /*border: 1px #ccc solid;*/

@@ -1,11 +1,11 @@
-const pool = require('./connection');
+const db = require('./connection');
 const {passwordUtils} = require('../utils');
 module.exports = async function (username, password) {
     let conn;
     let userId = 0;
     try {
-        conn = await pool.getConnection();
-        const rows = await conn.query("SELECT id, password FROM users WHERE username=?", [username]);
+        conn = await db.connect();
+        const rows = await conn.query("SELECT id, password FROM users WHERE username=$1", [username]);
         if (rows[0]) { // a fost gasit userul
             const checkPassword = await passwordUtils.comparePassword(password, rows[0].password);
             if (checkPassword) { // parola este cea buna
@@ -15,7 +15,7 @@ module.exports = async function (username, password) {
     } catch (err) {
         throw err;
     } finally {
-        if (conn) conn.release(); //release to pool
+        conn.done();
     }
     return userId;
 }

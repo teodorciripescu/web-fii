@@ -13,12 +13,13 @@ exports.createToken = function(payload, secret){
 }
 exports.extractToken = function(req){
     //verificam daca este prezent header-ul de autorizare
-    if (req.headers.authorization &&
+    const token = getCookies(req)['authToken'];
+    if (token &&
         //verificam daca header-ul contine Bearer,
         //spargand stringul in 2 bucati la intalnirea caracterului ' '
-        req.headers.authorization.split(' ')[0] === 'Bearer') {
+        token.split(' ')[0] === 'Bearer') {
         //intoarcem tokenul extras
-        return req.headers.authorization.split(' ')[1];
+        return token.split(' ')[1];
     }
     return null;
 }
@@ -31,4 +32,15 @@ exports.decodeToken = function(token, secret){
     } catch (error) {
         throw error;
     }
+}
+
+function getCookies(request) {
+    var cookies = {};
+    try{
+    request.headers && request.headers.cookie.split(';').forEach(function(cookie) {
+        let chunks = cookie.match(/(.*?)=(.*)$/)
+        cookies[ chunks[1].trim() ] = (chunks[2] || '').trim();
+    });
+    } catch(error){}
+    return cookies;
 }

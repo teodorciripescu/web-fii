@@ -36,8 +36,8 @@ function drawLineChart(){
             chart: {
                 title: 'Accidents'
             },
-            width: 900,
-            height: 500,
+            width: computeChartWidth(),
+            height: computeChartWidth()/2,
             axes: {
                 x: {
                     0: {side: 'top'}
@@ -52,4 +52,15 @@ function drawLineChart(){
         chart.draw(data, google.charts.Line.convertOptions(options));
     });
 
+}
+
+function computeChartWidth() {
+    const screenWidth = window.innerWidth;
+    const chartElementWidth = document.getElementById('chart').offsetWidth;
+    console.log('chart width ', chartElementWidth);
+    if(screenWidth > 800){
+        return chartElementWidth;
+    } else{
+        return screenWidth - 20;
+    }
 }
