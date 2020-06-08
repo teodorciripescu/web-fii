@@ -21,4 +21,7 @@ router.use('/columns', columnsDescription);
 const table = require('./table');
 router.use('/table', table);
 
+const detailedAccident = require('./detailedAccident');
+router.use('/accident', detailedAccident);
+
 module.exports = router;

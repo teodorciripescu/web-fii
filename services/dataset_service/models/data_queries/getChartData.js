@@ -5,9 +5,9 @@ module.exports = async function(data){
     let res;
     const chartType = data.chart.chart_type;
     if(!data.options.length){
-        console.log(data.chart.chart_type);
+        //console.log(data.chart.chart_type);
         res = await runQuery(createQuery(data)[0],[], chartType);
-        console.log(res);
+        //console.log(res);
     } else{
         const query = createQuery(data);
         res = await runQuery(query[0], query[1], chartType);
