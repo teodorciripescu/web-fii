@@ -1,6 +1,11 @@
 const db = require('../connection');
+const read = require('./get_categories/readJson');
 
 module.exports = async function(column, input){
+    return await searchInCashedFiles(column, input);
+    //return await sqlSearchSuggestions(column, input);
+}
+async function sqlSearchSuggestions(column, input){
     let res, sql;
     if(!isNaN(input)){
         console.log(input);
@@ -17,6 +22,27 @@ module.exports = async function(column, input){
         res = err;
     } finally {
         conn.done();
+    }
+    return res;
+}
+
+async function searchInCashedFiles(column, input){
+    column = column.toLowerCase();
+    const maxRes = 50;
+    let count = 0, i = 0;
+    let res = [];
+    const data = await read(`./json_data/dropdown_categories/${column}.json`);
+    try {
+        while (count < maxRes && i < data.length) {
+            if(data[i][column]!== null)
+                if (data[i][column].toLowerCase().startsWith(input)) {
+                    res.push(data[i][column]);
+                    count++;
+                }
+            i++;
+        }
+    }catch(e){
+        console.log(e);
     }
     return res;
 }

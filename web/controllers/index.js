@@ -6,4 +6,5 @@ exports.apiChartController = require('./api_controllers/data_queries/apiChartCon
 exports.viewAuthController = require('./view_controllers/viewAuthController');
 exports.mainPageController = require('./view_controllers/mainPageController');
 exports.viewStatisticsController = require('./view_controllers/viewStatisticsController');
+exports.viewTableController = require('./view_controllers/viewTableController');
 exports.viewColumnsDescriptionController = require('./view_controllers/viewColumnsDescriptionController');

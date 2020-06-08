@@ -1,0 +1,19 @@
+<div class="send-button-container" id="sendDataContainer">
+    <input class="send-button" id="sendDataButton1" type="button" value="Previous" onclick="loadPreviousTable()">
+    <input class="send-button" id="sendDataButton2" type="button" value="Next" onclick="loadNextTable()">
+</div>
+<div id="chartLineOptionsContainer" class="chart-specific-options" >
+    <input class="reset-button" type="button" id="resetButton" value="Reset" onclick="resetTable()">
+</div>
+<div class="chart-specific-options" id="chartSpecificOptions">
+
+</div>
+
+<div class="label-container" id="chosenOptionsLabels">
+
+</div>
+
+<script>
+    observeChosenOptionsLabels();
+    loadNextTable();
+</script>
