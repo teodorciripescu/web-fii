@@ -18,4 +18,10 @@ router.use('/',auth);
 const admin = require('./admin');
 router.use('/admin', admin);
 
+const map = require('./map');
+router.use('/map', map);
+
+
+
+
 module.exports = router;

@@ -33,6 +33,9 @@ router.use('/admin', admin);
 const start = require('./start');
 router.use('/start', start);
 
+const map = require('./map');
+router.use('/map', map);
+
 
 
 module.exports = router;

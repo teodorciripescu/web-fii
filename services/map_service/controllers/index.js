@@ -1,0 +1,1 @@
+exports.mapController = require('./mapController');

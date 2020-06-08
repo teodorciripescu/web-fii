@@ -61,14 +61,21 @@
            // console.log()
             let obj=JSON.parse(x.data.rezultat);
 
+            let div=document.createElement("div");
+            div.style.background="blue";
+            oContent.appendChild(div);
+
             for(let post of obj.posts)
             {
                 console.log(post);
 
-                let paragraf=document.createElement("p");
-                paragraf.innerText=post;
-                paragraf.style.color="red";
-                oContent.appendChild(paragraf);
+                let paragraph=document.createElement("p");
+                paragraph.innerText=post;
+                paragraph.style.color="red";
+                let paragraph_div=document.createElement("div");
+                paragraph_div.style.background="yellow";
+                paragraph_div.appendChild(paragraph)
+                div.appendChild(paragraph_div);
             }
 
 
