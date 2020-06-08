@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page AVI</title>
+    <link rel="stylesheet" href="../stylesheet/loginpage.css">
+    <style>
+        .container_butoane{/*un container*/
+
+            /*marime*/
+            width: 70vw;
+            height: 70vw;
+
+
+            /*pozitionare*/
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            z-index:1;
+
+            /*aspect*/
+            border-radius:5px;
+        }
+
+
+        .btn{
+            /*pozitionare*/
+            position:absolute;
+            top:50%;
+            left: 30%;
+            transform: translate(-50%,-50%);
+
+            /*aspect*/
+            background-color: #fff2a8;
+            border-radius: 5px;
+            height:100px;
+            width:200px;
+            border-bottom: solid #6495ED 2px;
+            border-right: solid #6495ED 1px;
+            margin: 20px;
+
+            /*text*/
+            font-family:American Typewriter, serif;
+            font-size: large;
+            color:#262635;
+
+        }
+
+    </style>
+
+
+
+
+</head>
+<body class="background">
+
+
+<div class="container_butoane">
+
+
+    <button onclick="redirectAccid()" style="position: relative;"class="btn" id="accid_man">Accidents Management</button>
+    <button onclick="redirectInternal()"  style="position: relative; "class="btn" id="admin_man">Admins Management</button>
+    <button onclick="redirectPosts()" style="position: relative; "class="btn" id="mainpage_man">MainPage Management</button>
+
+</div>
+
+
+</body>
+
+<script>
+    function redirectInternal() {
+      //  location.replace("http://localhost:3000/admin/internal");
+        location.href="http://localhost:3000/admin/internal";
+    }
+
+    function redirectPosts() {
+        location.href="http://localhost:3000/admin/posts";
+       // location.replace("http://localhost:3000/admin/posts");
+    }
+
+    function redirectAccid() {
+        location.href="http://localhost:3000/admin/accid";
+       // location.replace("http://localhost:3000/admin/accid");
+    }
+
+
+
+
+    var btn = document.getElementById("accid_man");
+    btn.addEventListener("click", function(){
+
+    });
+    btn = document.getElementById("admin_man");
+    btn.addEventListener("click", function(){
+
+    });
+    btn = document.getElementById("mainpage_man");
+    btn.addEventListener("click", function(){
+
+    });
+</script>
+</html>

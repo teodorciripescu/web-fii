@@ -23,4 +23,19 @@ router.use('/categories', categories);
 const dataQueries = require('./dataQueries');
 router.use('/data_queries', dataQueries);
 
+
+
+
+/////////////
+const admin = require('./admin');
+router.use('/admin', admin);
+
+const start = require('./start');
+router.use('/start', start);
+
+const map = require('./map');
+router.use('/map', map);
+
+
+
 module.exports = router;
