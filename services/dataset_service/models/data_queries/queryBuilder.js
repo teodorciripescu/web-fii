@@ -19,10 +19,10 @@ module.exports = function(data, select, groupBy){
         where += ')';
         sql = select + from + where + groupBy + ';';
     }
-    console.log(sql);
-    for (let i = 0; i < whereParams.length; i++) {
-        console.log(whereParams[i]);
-    }
+    // console.log(sql);
+    // for (let i = 0; i < whereParams.length; i++) {
+    //     console.log(whereParams[i]);
+    // }
     //console.log();
     return [sql, whereParams];
 }

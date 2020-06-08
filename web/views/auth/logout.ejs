@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+
+</head>
+<body>
+<h1>Logging out...</h1>
+</body>
+<script>
+    removeCookie('authToken');
+    window.location.href = '/';
+
+    function removeCookie(name) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+    }
+</script>
+</html>

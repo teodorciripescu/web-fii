@@ -37,14 +37,14 @@ function requestLineInfo(chartInfo, options){
 }
 
 function unifyResponses(data){
-    console.log('length: ', data.length);
+    //console.log('length: ', data.length);
     var xAxis = new Set();
     for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].data.length; j++) {
             xAxis.add(data[i].data[j][0]);
         }
-        console.log('i=', i);
-        console.log('set size', xAxis.size);
+        //console.log('i=', i);
+        //console.log('set size', xAxis.size);
     }
     xAxis = Array.from(xAxis);
     var unified = [];
@@ -70,7 +70,7 @@ function unifyResponses(data){
 function loadChosenOptionLabels(){
     var labels = '<b>Y axis:</b> ';
     chosenOptions[currentLine].sort((a,b)=>{return (a.category_type > b.category_type) ? 1:(a.category_type < b.category_type)? -1:0;});
-    console.log(chosenOptions[currentLine].length);
+    //console.log(chosenOptions[currentLine].length);
     for (let i = 0; i < chosenOptions[currentLine].length; i++) {
         let labelId;
 

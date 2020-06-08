@@ -5,19 +5,29 @@
     <%- include('head'); -%>
 </head>
 <body>
-<header>
-    <%- include('navbar');%>
-</header>
-<div class="flex">
-    <div class="flex-element-choicebar">
-    <%- include('choicebar'); -%>
-    </div>
 
-    <div class="flex-element-display">
+<div class="wrapper">
+    <header>
+        <%- include('../common/navbar'); -%>
+    </header>
+    <div style="flex: 1;">
+    <div class="flex">
+        <div class="flex-element-choicebar">
+        <%- include('../common/choicebar'); -%>
+        </div>
 
-        <%- include('chosenOptions'); -%>
-        <%- include('displayDataChart'); -%>
+        <div class="flex-element-display">
+
+            <%- include('../common/chosenOptions'); -%>
+            <%- include('displayDataChart'); -%>
+        </div>
     </div>
+    </div>
+    <footer>
+        <%- include('../common/footer'); -%>
+    </footer>
+
 </div>
+
 </body>
 </html>

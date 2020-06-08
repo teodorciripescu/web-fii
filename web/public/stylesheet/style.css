@@ -7,22 +7,39 @@ body{
     html, body, .flex {
         height: 100%;
     }
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
     .flex {
         display: flex;
         flex-direction: row;
     }
-
+    table{
+        width: 80vw;
+    }
 }
 @media(max-width: 800px){
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        height: 100%;
+    }
     .flex {
         display: flex;
         flex-direction: column;
-
+    }
+    table{
+        width: 100%;
     }
 }
 
 .flex-element-choicebar {
     flex: 2;
+    /*max-height: 100vh;*/
+    /*overflow: auto;*/
     /*border-style: solid;*/
     /*border-color: red;*/
 }
@@ -32,3 +49,4 @@ body{
     /*border-style: solid;*/
     /*border-color: green;*/
 }
+

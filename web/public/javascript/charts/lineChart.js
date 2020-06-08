@@ -22,22 +22,22 @@ function drawLineChart(){
         else {
             data.addColumn({type: 'string', id: chartInfo.x_axis});
             for (let i = 0; i < chartData.length; i++) {
-                chartData[i][0] = chartData[i][0].toString();
+                chartData[i][0] = String(chartData[i][0]);
             }
             // chartData = chartData.data.map(a => [a[0].toString(),parseInt(a[1])]);
         }
         for (let i = 1; i < chartData[0].length; i++) {
             data.addColumn({ type: 'number', id: 'Accidents ' + i });
         }
-        console.log(chartData[chartData.length - 1]);
+        //console.log('chart data ',chartData[chartData.length - 1]);
         data.addRows(chartData);
 
         var options = {
             chart: {
                 title: 'Accidents'
             },
-            width: 900,
-            height: 500,
+            width: computeChartWidth(),
+            height: computeChartWidth()/2,
             axes: {
                 x: {
                     0: {side: 'top'}
@@ -52,4 +52,15 @@ function drawLineChart(){
         chart.draw(data, google.charts.Line.convertOptions(options));
     });
 
+}
+
+function computeChartWidth() {
+    const screenWidth = window.innerWidth;
+    const chartElementWidth = document.getElementById('chart').offsetWidth;
+    //console.log('chart width ', chartElementWidth);
+    if(screenWidth > 800){
+        return chartElementWidth;
+    } else{
+        return screenWidth - 20;
+    }
 }

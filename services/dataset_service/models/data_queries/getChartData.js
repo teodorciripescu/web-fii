@@ -3,13 +3,14 @@ const db = require('../connection');
 
 module.exports = async function(data){
     let res;
+    const chartType = data.chart.chart_type;
     if(!data.options.length){
-        console.log(data.chart.chart_type);
-        res = await runQuery(createQuery(data)[0],[]);
-        console.log(res);
+        //console.log(data.chart.chart_type);
+        res = await runQuery(createQuery(data)[0],[], chartType);
+        //console.log(res);
     } else{
         const query = createQuery(data);
-        res = await runQuery(query[0], query[1]);
+        res = await runQuery(query[0], query[1], chartType);
     }
     return {data:res, status:200};
 }
@@ -38,7 +39,6 @@ function createQuery(data){
                 return queryBuilder(data.options, select, groupBy);
             }
         } else{
-            //TODO check if xAxis is actually a column
             if(checkxAxis(xAxis)){
                 select = `select ${xAxis} as start_time, count(id)`;
                 groupBy = ` group by ${xAxis}`;
@@ -46,24 +46,27 @@ function createQuery(data){
             }
             return null;
         }
+    } else if(chartType === 'table'){
+        select = 'select * ';
+        groupBy = `order by id limit ${data.chart.amount} 
+            offset ${data.chart.amount * (data.chart.page - 1)}`;
+        return queryBuilder(data.options, select, groupBy);
     }
 }
 
 
 
 
-async function runQuery(sql, params) {
+async function runQuery(sql, params, chartType) {
     let res, conn;
     try {
         conn = await db.connect();
 
         res = await conn.query(sql, params);
-
-        // console.log(res[0]);
-        // console.log(res[1]);
-        res = res.map(a => [a.start_time,a.count]);
-        // console.log(res[0]);
-        // console.log(res[1]);
+        //console.log(res[0]);
+        if(chartType !== 'table'){
+            res = res.map(a => [a.start_time,a.count]);
+        }
     } catch (err) {
         console.log(err);
         res = err;

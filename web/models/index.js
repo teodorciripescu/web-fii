@@ -5,3 +5,4 @@ exports.suggestion = require('./categories/suggestion');
 exports.getCategories = require('./categories/getCategories');
 
 exports.getChartData = require('./data_queries/getChartData');
+exports.getAccidentById = require('./data_queries/getAccidentById');

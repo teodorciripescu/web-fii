@@ -22,13 +22,27 @@ async function drawCalendarChart() {
         google.visualization.events.addListener(chart, 'ready', function () {
             enableExportButtons();
         });
-
+        var years = new Date(chartData[chartData.length-1][0] - chartData[0][0]).getFullYear() - 1970;
         var options = {
             title: "Accidents",
-            height: 900,
-            width:925
+            calendar: {
+                cellSize: computeCellSize()
+            },
+             height: ((years + 2) * 10 ) * computeCellSize(),
+            // width:925
         };
-
         chart.draw(dataTable, options);
     });
+}
+
+function computeCellSize() {
+    //console.log(window.innerWidth);
+    const screenWidth = window.innerWidth;
+    const chartElementWidth = document.getElementById('chart').offsetWidth;
+    //console.log('chart width ', chartElementWidth);
+    if(screenWidth > 800){
+        return chartElementWidth / 60;
+    } else{
+        return screenWidth / 64;
+    }
 }

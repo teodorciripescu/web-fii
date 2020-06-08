@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AVi</title>
+    <%- include('head'); -%>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <%- include('../common/navbar'); -%>
+    </header>
+    <div style="flex: 1;">
+        <div class="flex">
+            <div class="flex-element-choicebar">
+                <%- include('../common/choicebar'); -%>
+            </div>
+
+            <div class="flex-element-display">
+
+                <%- include('chosenOptions'); -%>
+                <%- include('pageContent'); -%>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <%- include('../common/footer'); -%>
+    </footer>
+
+</div>
+
+</body>
+</html>
