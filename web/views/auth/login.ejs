@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page AVI</title>
+    <link rel="stylesheet" href="../stylesheet/loginpage.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/style.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/navbar.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/footer.css">
+</head>
+<body class="background">
+
+<div class="wrapper">
+    <header>
+        <%- include('../common/navbar'); -%>
+    </header>
+    <div style="flex: 1;">
+        <div class="chenar patrat">
+
+            <div class="logare in_chenar">Login</div>
+            <div class="credentiale in_chenar" style="align-self: baseline;" >
+                Name:
+                <input class="text_input" type="text"  >
+            </div>
+            <div class="credentiale " style="align-self: baseline;top:10px" >
+                Password:
+                <input class="text_input" type="password">
+            </div>
+
+            <button class="btn" id="Continua">Continue</button>
+
+
+        </div>
+    </div>
+    <footer>
+        <%- include('../common/footer'); -%>
+    </footer>
+
+</div>
+
+
+
+
+</body>
+
+
+<script src="../javascript/loginpage.js"></script>
+</html>

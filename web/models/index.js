@@ -14,3 +14,4 @@ exports.adminPosts=require('./admin/posts');
 exports.start=require('./start');
 exports.map=require('./map');
 exports.adminAccid=require('./admin/accid');
+exports.getAccidentById = require('./data_queries/getAccidentById');

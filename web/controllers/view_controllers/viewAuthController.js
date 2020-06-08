@@ -1,10 +1,19 @@
-exports.login = (req,res) => {
-    const page = '<html><head><title>Login Test Page!</title></head><body><h1>I am a login test page!</h1></body></html>';
+const render = require('../../utils/renderPage');
+exports.login = async (req,res) => {
     res.statusCode = 200;
+    const page = await render('./views/auth/login.ejs', {});
     return res.end(page);
 }
 
 
-exports.register = (req,res) => {
+exports.register = async (req,res) => {
+    res.statusCode = 200;
+    const page = await render('./views/auth/register.ejs', {});
+    return res.end(page);
+}
 
+exports.logout = async (req, res) => {
+    res.statusCode = 200;
+    const page = await render('./views/auth/logout.ejs', {});
+    return res.end(page);
 }

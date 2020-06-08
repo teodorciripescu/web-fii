@@ -1,0 +1,21 @@
+<nav>
+    <div class="container-navbar">
+        <img src="images/logo.png" alt="AVi logo">
+        <div class="element-navbar"><a href="/">Home</a></div>
+        <div class="element-navbar"><a href="/statistics">Statistics</a></div>
+        <div class="element-navbar"><a href="/map">Map View</a></div>
+        <div class="element-navbar"><a href="/table">Visualize Data</a></div>
+        <div class="element-navbar"><a href="/columns">Fields Description</a></div>
+        <div class="element-navbar"><a href="/about">About Us</a></div>
+        <%try{ if(user){%>
+            <div class="element-navbar"><a href="/history">My History</a></div>
+            <div class="element-login-navbar"><a href="/logout">Logout (<%= user.username%>)</a></div>
+        <%} else{%>
+            <div class="element-login-navbar">
+                    <a href="/login">Login</a>
+                    <span>/</span>
+                    <a href="/register">Register</a>
+            </div>
+        <%}}catch(e){}%>
+    </div>
+</nav>

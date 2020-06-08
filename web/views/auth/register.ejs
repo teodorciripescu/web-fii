@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+        <html lang="en" >
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../stylesheet/registerpage.css">
+            <link rel="stylesheet" type="text/css" href="stylesheet/style.css">
+            <link rel="stylesheet" type="text/css" href="stylesheet/navbar.css">
+            <link rel="stylesheet" type="text/css" href="stylesheet/footer.css">
+            <link rel="stylesheet" type="text/css" href="stylesheet/TABEL_2.0.css">
+            <title>Register page AVI</title>
+
+        </head>
+<body class="background">
+
+
+<div class="wrapper">
+    <header>
+        <%- include('../common/navbar'); -%>
+    </header>
+    <div style="flex: 1;">
+        <div class="chenar patrat">
+
+            <div class="register " style="align-self: baseline;">Register</div>
+
+            <div class="credentiale in_chenar"  style="align-self: baseline;" >
+                User name:</div>
+
+            <input class="text_input in_chenar" id="name" type="text" placeholder="at most 10 letters"  >
+
+            <div class="credentiale in_chenar "  style="align-self: baseline;" >
+                Password:</div>
+
+            <input class="text_input in_chenar"  id="pass" type="password" placeholder="at least 8 letters">
+
+            <div class="credentiale in_chenar "  style="align-self: baseline;" >
+                Confirm password:</div>
+
+            <input class="text_input in_chenar" id="confirmpass" type="password" placeholder="at least 8 letters">
+
+            <div class="credentiale in_chenar"  style="align-self: baseline;" >
+                Email:</div>
+
+            <input class="text_input in_chenar"  id="email"  type="text" placeholder="name@example.com" >
+
+
+            <button class="btn " id="Done">Done</button>
+
+
+        </div>
+    </div>
+    <footer>
+        <%- include('../common/footer'); -%>
+    </footer>
+
+</div>
+<script src="../javascript/registerpage.js"></script>
+
+</body>
+</html>

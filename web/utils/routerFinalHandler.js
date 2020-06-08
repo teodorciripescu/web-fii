@@ -6,7 +6,7 @@ module.exports = function (req,res) {
         success: false,
         message: `Request could not be made at this route. Cannot ${req.method} at ${req.url} `
     };
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    //res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.statusCode = 403; //Forbidden
     res.end(JSON.stringify(obj));
 };
