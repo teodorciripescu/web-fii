@@ -39,8 +39,10 @@ async function loadTable(){
 }
 
 function loadPreviousTable(){
-    currentTablePage--;
-    loadTable();
+    if(currentTablePage > 1) {
+        currentTablePage--;
+        loadTable();
+    }
 }
 
 function loadNextTable(){

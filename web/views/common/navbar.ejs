@@ -3,9 +3,10 @@
         <img src="images/logo.png" alt="AVi logo">
         <div class="element-navbar"><a href="/">Home</a></div>
         <div class="element-navbar"><a href="/statistics">Statistics</a></div>
-        <div class="element-navbar"><a href="view_data.html">Visualize Data</a></div>
+        <div class="element-navbar"><a href="/table">Visualize Data</a></div>
+        <div class="element-navbar"><a href="/columns">Fields Description</a></div>
         <div class="element-navbar"><a href="/about">About Us</a></div>
-        <% if(user){%>
+        <%try{ if(user){%>
             <div class="element-navbar"><a href="/history">My History</a></div>
             <div class="element-login-navbar"><a href="/logout">Logout (<%= user.username%>)</a></div>
         <%} else{%>
@@ -14,6 +15,6 @@
                     <span>/</span>
                     <a href="/register">Register</a>
             </div>
-        <%}%>
+        <%}}catch(e){}%>
     </div>
 </nav>

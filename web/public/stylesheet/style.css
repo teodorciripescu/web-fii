@@ -16,6 +16,9 @@ body{
         display: flex;
         flex-direction: row;
     }
+    table{
+        width: 80vw;
+    }
 }
 @media(max-width: 800px){
     .wrapper {
@@ -27,7 +30,9 @@ body{
     .flex {
         display: flex;
         flex-direction: column;
-
+    }
+    table{
+        width: 100%;
     }
 }
 
