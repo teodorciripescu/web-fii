@@ -2,11 +2,11 @@ const {extractToken, decodeToken} = require('../utils/jwtUtils');
 
 module.exports = function (req, res, next){
     try {
-        const token = extractToken(req,'authToken');
+        const token = extractToken(req,'adminToken');
         if (token) {
             // verify if the token is authentic
             try{
-                req.user = decodeToken(token, process.env.JWT_SECRET).payload;
+                req.user = decodeToken(token, process.env.JWT_SECRET_ADMIN).payload;
                 return next();
             } catch (error) {
                 //console.log(error);
@@ -19,8 +19,8 @@ module.exports = function (req, res, next){
         } else{
 
             //if auth is absolutely necessary
-            let requireAuthpaths = ['profile', 'history'];
-            //console.log(req.url);
+            let requireAuthpaths = ['/manager', '/internal','/posts','/accid'];
+            console.log(req.url);
             if (!requireAuthpaths.includes(req.url)) {
                 return next();
             }

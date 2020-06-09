@@ -110,9 +110,6 @@ dar nu are sens
         .catch(error => console.log('error', error));
 
 
-   // document.getElementById()
-
-
 
     var coloane=["id",
         "source",        "tmc",        "severity",        "start_time",        "end_time",        "start_lat",
@@ -140,14 +137,14 @@ dar nu are sens
     tabelrow.appendChild(cap_tabel);}
     tabelhead.appendChild(tabelrow);
     tabel.appendChild(tabelhead);
-  //  oContents[0].appendChild(cap_tabel);
+
 
 ///vom crea 100 de randuri
 
     for(var i=0;i<100;i++)
     {    tabelrow=document.createElement("tr");
             tabelrow.id=i;
-            tabelrow.style.background_color="red";
+         //   tabelrow.style.background_color="red";
         tabelbody.appendChild(tabelrow);
         tabel.appendChild(tabelbody);
     }
@@ -159,24 +156,21 @@ dar nu are sens
 
 
 
-   console.log(ok);
-    console.log(ok.rezultat);
-
     var m,p,elem;
-    console.log("de aici:");
+
     ok.then(x=> {
          x.json().then(y=>{
 
              obj=y.rezultat;
 
-             console.log(obj);
-
+          /*   console.log(obj);
+*/
 
              for(var j=0;j<coloane.length;j++)
              {m=p=0;
 
             for(var i=1;i<=100;i++){
-                 console.log(m,p);
+
              var cautat1='"'+coloane[j]+'"';
              var cautat2='"'+coloane[j+1]+'"';
 
@@ -208,11 +202,6 @@ dar nu are sens
 
                 tabelrow=document.getElementById(i-1);
                 tabelrow.appendChild(celula_tabel);
-
-
-               //  console.log(elem);
-
-
 
 
           }}

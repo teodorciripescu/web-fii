@@ -11,9 +11,9 @@ exports.createToken = function(payload, secret){
         });
     });
 }
-exports.extractToken = function(req){
+exports.extractToken = function(req, tokenName){
     //verificam daca este prezent header-ul de autorizare
-    const token = getCookies(req)['authToken'];
+    const token = getCookies(req)[tokenName];
     if (token &&
         //verificam daca header-ul contine Bearer,
         //spargand stringul in 2 bucati la intalnirea caracterului ' '

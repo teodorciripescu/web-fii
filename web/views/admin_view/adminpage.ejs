@@ -45,7 +45,7 @@
 <script>
 
     var i;
-  //  var credentials=[""];
+
     var nr=0;
 
     ///actionare buton pt generare statistici
@@ -88,28 +88,16 @@
 
     async function valid() {
 
-        /*  var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-              //    document.getElementById("demo").innerHTML = this.responseText;
-                  ok=1;
-              }
-          };
-          xhttp.open("GET", "ajax_info.txt", true);
-          xhttp.send();*/
         console.log("credentials0:"+ credentials[1]);
         console.log("credentials1:"+ credentials[2]);
 
 
-        var myHeaders = new Headers();
-       // myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({ "username": credentials[1],
             "password": credentials[2]});
 
         var requestOptions = {
             method: 'POST',
-         //   headers: myHeaders,
             body: raw,
             redirect: 'follow'
         };
@@ -117,20 +105,25 @@
         var ok = await fetch("http://localhost:3000/api/admin/login", requestOptions)
             .catch(error => console.log('error', error));
 
-
       await ok.json().then(data=>{
 
-          let tokenul=data.token;
+          let tkn=data.token;
+          setCookie("adminToken",tkn,30);
 
-          document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
       });
 
-   /*   console.log(tokenul);
-        document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
-*/
-        console.log(ok.ok);
-        //console.log(ok.success);
         return ok.ok;
+    }
+
+
+    function setCookie(name, value, days) {
+        let cookie = `${name}=Bearer ${value}`;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            cookie += `; expires=${date.toUTCString()}; path=/`;
+        }
+        document.cookie = cookie;
     }
 
 

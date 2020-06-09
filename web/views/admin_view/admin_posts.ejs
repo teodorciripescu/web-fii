@@ -94,18 +94,6 @@
         var ok = await fetch("http://localhost:3000/api/admin/posts", requestOptions)
             .catch(error => console.log('error', error));
 
-
-/*        await ok.json().then(data=>{
-
-            let tokenul=data.token;
-
-            document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
-        });*/
-
-
-        console.log(ok);
-        console.log(ok.ok);
-        //console.log(ok.success);
         return ok.ok;
     }
 

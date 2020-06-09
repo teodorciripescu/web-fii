@@ -89,7 +89,6 @@
                 });
                 markers.push(marker);
 
-                console.log("afisam begin:"+begin);
 
                 if(begin===1) {
                     map.setZoom(10);
@@ -120,10 +119,6 @@
                     var ok = fetch("http://localhost:3000/api/map",requestOptions)
                         .catch(error => console.log('error', error));
 
-
-
-                    console.log("ok:"+ok);
-
                     var coloane=["id",
                         "source",        "tmc",        "severity",        "start_time",        "end_time",        "start_lat",
                         "start_lng",        "end_lat",        "end_lng",        "distance",        "description",        "number",        "street",        "side",        "city",        "county",        "state",        "zipcode",        "country",
@@ -144,22 +139,14 @@
                     var longs=[];
 
                     var m,p,elem;
-                    console.log("de aici:");
+
 
                     ok.then(x=> {
-                        console.log("x:")
-                        console.log(x);
-                        console.log("x_rez:"+x.rezultat);
-                        x.json().then(y => {
 
-                            console.log("y:");
-                            console.log(y.rezultat);
+                        x.json().then(y => {
+;
                             var obj = y.rezultat;
 
-
-
-
-                            console.log("vom intra acum in for:");
 
                             for (var j = 0; j < coloane.length; j++) {
                                 m = p = 0;
@@ -186,10 +173,6 @@
                                         elem = obj.substring(m, p);
                                     }
 
-                                    console.log("elem:");
-                                    console.log(elem);
-
-
 
                                     if (coloane[j] === "start_lat")
                                        latits.push(elem);
@@ -199,33 +182,19 @@
                                     info[j].push(elem);
 
                                 }
-                                console.log("info:");
-                                console.log(info[j]);
-
                             }
 
-                            console.log("afisam coord::")
-                            console.log(latits);
-                            console.log(longs);
 
-                            console.log("lungimile:");
-                            console.log(latits.length);
-                            console.log(longs.length);
 
-                            let l1, l2,loc,l;
-                            var latit2,long2,m2,p2,coord2,marker2;
+                            let l1, l2,l;
+
                             l=latits.length;
 
                             ///adaugarea tuturor markerilor
                             while(latits.length&&longs.length){
-                                console.log("in_while:");
+
                                 l1=latits.pop();
                                 l2=longs.pop();
-
-
-                                console.log(latits.length,longs.length);
-                                console.log(l1,l2);
-
 
 
                               let marker2 = new google.maps.Marker({
@@ -246,8 +215,7 @@
                              ;
 
 
-                             console.log("marker2:");
-                             console.log(marker2);
+
                                 marker2.addListener('click', function() {
                                     var infoWindow = new google.maps.InfoWindow();
                                     infoWindow.setContent(text);
@@ -259,7 +227,6 @@
 
                             }
 
-                            console.log("am iesit din while");
                         })
                     });
                     }

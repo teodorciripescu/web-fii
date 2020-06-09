@@ -17,13 +17,6 @@ router.post('/internal', internalController);
 router.post('/internalDelete', internalController);
 router.post('/posts', postsController);
 router.post('/accid', accidController);
-/*
 
-router.get('/internal', adminManController);
-router.get('/accidents', accidManController);
-router.get('/posts', postsManController);*/
-
-//const auth = require('./auth');
-//router.use('/auth',auth);
 
 module.exports = router;
