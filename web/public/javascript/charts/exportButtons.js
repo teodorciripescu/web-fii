@@ -17,9 +17,12 @@ function exportCsv(){
 }
 
 function exportPng(){
-    html2canvas(document.getElementById("chart")).then(canvas => {
+    var chartElement = document.getElementById("chart");
+    chartElement.style.height = '1000px';
+    html2canvas(chartElement).then(canvas => {
         //canvas.toDataURL() -> base 64 encoding
         download(canvas.toDataURL(), 'chart.png', 'image/png');
+        chartElement.style.height = '';
     });
 }
 

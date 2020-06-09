@@ -3,7 +3,7 @@ function chartTypeChanged(){
     const chartType = document.getElementById('chartTypeSelect').value;
     var chartSpecificOptions = document.getElementById('chartSpecificOptions');
     resetAllLines();
-
+    document.getElementById('chart').innerHTML = '';
     switch (chartType) {
         case 'Line Chart':
             chartSpecificOptions.innerHTML = getLineChartSpecificOptionsAsHtml();
@@ -25,6 +25,10 @@ function chartTypeChanged(){
             hideElement('addLineButton');
             hideElement('lineSelect');
             break;
+        case 'Map Chart':
+            chartSpecificOptions.innerHTML = '';
+            hideElement('addLineButton');
+            hideElement('lineSelect');
     }
 }
 
