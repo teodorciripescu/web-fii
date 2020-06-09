@@ -58,8 +58,7 @@
 
         console.log(ok);
         ok.json().then(x=> {
-           // console.log()
-            let obj=JSON.parse(x.data.rezultat);
+            let obj = x.data.rezultat;
 
             let description_div=document.createElement("div");
             let description_head=document.createElement("h3");
@@ -102,7 +101,7 @@
             oContent.appendChild(div_img1);
 
 
-            for(let post of obj.posts)
+            for(let post of obj)
             {
                 console.log(post);
 

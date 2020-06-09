@@ -3,3 +3,5 @@ web/node_modules/
 services/auth_service/node_modules/
 services/dataset_service/node_modules/
 services/admin_service/node_modules/
+services/map_service/node_modules/
+services/news_service/node_modules/
