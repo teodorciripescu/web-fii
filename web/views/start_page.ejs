@@ -3,11 +3,85 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Title</title>
     <link rel="stylesheet" href="../stylesheet/loginpage.css">
 
     <title> Dynamic DOM Elements </title>
 
+
+    <style>
+
+        .posts{
+
+            width:80em;
+            padding-left: 5em;
+
+        }
+
+        .paragraph-div {
+            margin-top: 1em;
+
+        }
+        .div-resize {
+            width:100%;
+            height:40px;
+
+        }
+        .div-resize img {
+            width:10em;
+            height:10em;
+            padding-left: 0.5em;
+            padding-right: 0.5em;
+
+            position:relative;
+        }
+
+        @media only screen and (max-width: 108em){
+            .div-resize img {
+                width:8em;
+                height:8em;
+                position:relative;
+            }
+
+        }
+
+        .flex-container {
+
+            flex-wrap: nowrap;
+            display:flex;
+            flex-direction: row;
+
+        }
+
+
+
+
+        .principal-flex-container{
+            width:100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items:center;
+
+        }
+
+        .principal-flex-container > div {
+
+            padding-top: 2em;
+            margin-top: 2em;
+        }
+
+        .ornamented-text-container{
+            width:290px;
+        }
+
+        .ornamented-text-flex{
+
+            display: inline;
+
+        }
+    </style>
 
 </head>
 <body>
@@ -24,6 +98,12 @@
 </div>
 
 
+
+
+
+
+
+
 <div id="DynamicContent">
     gghg
 </div>
@@ -31,18 +111,9 @@
 </body>
 <script>
     var oContent = document.getElementById('DynamicContent');
-    //url pt pagina care furnizeaza asta
-  //  var cURL     = 'http://localhost:3000/start'
-
-    oContent.innerText='astrid';
-
-   // oContent.innerText=;
-
     legatura();
-    //console.log();
 
-
-    ///facem trimitere la baza de date -tabela: posts si extragem ultimele 10 postari si le afisam
+    ///facem trimitere la baza de date -tabela: posts si extragem ultimele 5 postari si le afisam
 
 
 
@@ -61,45 +132,60 @@
             let obj = x.data.rezultat;
 
             let description_div=document.createElement("div");
-            let description_head=document.createElement("h3");
-            description_div.style.background="blue";
-            description_div.style.width="70em";
+            let description_head=document.createElement("p");
+
+
+            description_div.style.width="80em";
             description_div.style.position="relative";
-            description_div.style.font="";
+
             description_head.innerText="Car accidents occur every day in the United States.\n" +
                 "Whether it is the drivers, the authorities, the pedestrians or the simple escapes of the senses, the accidents continue to take place with an alarming rate.\n" +
                 "In order to learn from the mistakes of others, to study human behaviour or to satisfy simple morbid curiosities,\n" +
                 " we present to you the AVI application - here to provide you with statistics, raw data, maps, a whole variety of methods to view all your interests.";
 
-
+            description_head.style.textAlign="justify";
+            description_head.style.textJustify="inter-word";
             description_div.appendChild(description_head);
 
             let div=document.createElement("div");
-            div.style.background="blue";
-            div.style.width="700px";
+            div.style.width="95%";
             div.style.position="relative";
 
+
+            ////welcome bridge
             let welcome_div=document.createElement("div");
             let welcome_head=document.createElement("h1");
-
-
             welcome_head.innerText="Welcome";
-            welcome_div.appendChild(welcome_head);
             welcome_div.padding="10px";
             welcome_head.padding="8px";
 
+            let ornament1=document.createElement("img");
+            ornament1.src="/images/Fine_Ornament_Black_L.png";
+            let ornament2=document.createElement("img");
+            ornament2.src="/images/Fine_Ornament_Black_R.png";
+            ornament1.className="ornamented-text-flex";
+            ornament2.className="ornamented-text-flex";
+            welcome_head.className="ornamented-text-flex";
 
-            let div_img1=document.createElement("div");
-            let img1=document.createElement("img");
-            img1.src="/images/6.jpg";
 
-            div_img1.appendChild(img1);
+            welcome_div.appendChild(ornament1);
+            welcome_div.appendChild(welcome_head);
+            welcome_div.appendChild(ornament2);
+            oContent.appendChild(welcome_div);
+
+            welcome_div.className="ornamented-text-container";
+            welcome_div.style.width="250px";
+            welcome_div.style.paddingLeft="20px";
+
+
+
 
             oContent.appendChild(description_div);
             oContent.appendChild(welcome_div);
             oContent.appendChild(div);
-            oContent.appendChild(div_img1);
 
+
+            ////posts
 
             for(let post of obj)
             {
@@ -110,17 +196,70 @@
 
                 paragraph.style.padding="7px";
                 paragraph.style.font="18px";
-               // paragraph.style.margin="3px";
                 let paragraph_div=document.createElement("div");
-                paragraph_div.style.background="#FAEBD7";
-                paragraph_div.style.border="solid 2px #FFFFE0";
-                paragraph_div.style.borderRadius="10px";
+
+                paragraph_div.style.borderBottom="solid 2px #F5F5F5";
+
                 paragraph_div.style.paddingTop="5px";
+
+                paragraph_div.className="paragraph-div";
+
+                paragraph_div.className="posts";
+
 
                 paragraph_div.appendChild(paragraph);
                 div.appendChild(paragraph_div);
             }
 
+
+
+            ///life bridge
+            let life_div=document.createElement("div");
+            let life_head=document.createElement("h1");
+            let ornament3=document.createElement("img");
+            ornament3.src="/images/Fine_Ornament_Black_L.png";
+            let ornament4=document.createElement("img");
+            ornament4.src="/images/Fine_Ornament_Black_R.png";
+            ornament3.className="ornamented-text-flex";
+            ornament4.className="ornamented-text-flex";
+            life_head.className="ornamented-text-flex";
+
+
+            life_head.innerText="Life Matters";
+            life_div.appendChild(life_head);
+            life_div.padding="10px";
+            life_head.padding="8px";
+
+            life_div.appendChild(ornament3);
+            life_div.appendChild(life_head);
+            life_div.appendChild(ornament4);
+            oContent.appendChild(life_div);
+
+            life_div.className="ornamented-text-container";
+
+
+
+            ///images
+
+            let div_imgs = document.createElement("div");
+            div_imgs.className="flex-container";
+
+
+
+            for(var i=2;i<=10;i++) {
+                let div_img1 = document.createElement("div");
+                let img1 = document.createElement("img");
+                img1.src = "/images/"+i+".jpg";
+
+                div_img1.className="div-resize";
+
+                div_img1.appendChild(img1);
+
+                div_imgs.appendChild(div_img1);
+            }
+
+            oContent.className="principal-flex-container";
+            oContent.appendChild(div_imgs);
 
 
         });
