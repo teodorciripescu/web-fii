@@ -47,6 +47,17 @@
                 });
 
 
+                var shotButton=document.getElementById("shotButton");
+                shotButton.innerText="Take a shot";
+                shotButton.style.width="95px";
+                shotButton.style.height="40px";
+                shotButton.style.zIndex="10000";
+                shotButton.style.position="absolute";
+                shotButton.style.top="14%";
+                shotButton.style.left="2%";
+
+
+
             //////////
             //notificari
 
@@ -61,6 +72,9 @@
                 addMarker(event.latLng.toString(),1);
                 n=1;
 
+               // console.log(event.latLng.lat);
+              //  shotButton.addEventListener("click",mapShot());
+
 
             });
 
@@ -70,6 +84,7 @@
 
                 ////extragere lat si long
                 var latit,long,m,p,coord,info=[];
+
 
 
 
@@ -96,6 +111,10 @@
                 markers.push(marker);
 
 
+
+
+
+
                 if(begin===1) {
                     map.setZoom(10);
                     map.setCenter(marker.getPosition());
@@ -115,7 +134,7 @@
                         "lngmin": Number(long) - limit
                     });
 
-                    console.log("raw:"+raw);
+                   // console.log("raw:"+raw);
 
                     var requestOptions = {
                         method: 'POST',
@@ -150,16 +169,16 @@
                     ok.then(x=> {
 
                         x.json().then(y => {
-;
+//;
                             var obj = y.rezultat;
 
 
                             for (var j = 0; j < coloane.length; j++) {
                                 m = p = 0;
-                                console.log(j);
+                                //console.log(j);
 
                                 for (var i = 1; i <= 25; i++) {
-                                    console.log(m, p);
+                                   // console.log(m, p);
                                     var cautat1 = '"' + coloane[j] + '"';
                                     var cautat2 = '"' + coloane[j + 1] + '"';
 
@@ -190,6 +209,10 @@
                                 }
                             }
 
+                            var shotButton=document.getElementById("shotButton");
+                            console.log(shotButton);
+                            shotButton.addEventListener("click",()=>mapShot(Number(latit),Number(long),latits,longs));
+
 
 
                             let l1, l2,l;
@@ -218,7 +241,7 @@
                              +"description:" +info[11][Number(marker2.title)]
                             +"<p>severity:"+info[3][Number(marker2.title)]+"</p>"
                                  +`<a href="${ref}">`+"more about it"+"</a>";
-                             ;
+
 
 
 
@@ -264,6 +287,37 @@
 
 
 
+        async function mapShot(lat, long, latits, longs) {
+
+            console.log("am apasat butonul");
+            console.log("coord:");
+            console.log(lat, long);
+
+            let l1, l2;
+
+            var url = "https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&zoom=10&size=1200x1000&maptype=roadmap";
+            /* var ref="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=8&size=800x500&maptype=roadmap" ;*/
+
+            ///adaugarea tuturor markerilor
+            /*       while(latits.length&&longs.length){
+
+                       l1=latits.pop();
+                       l2=longs.pop();
+
+                             url=url+"&markers=color:blue%7C" +Number(l1)+","+Number(l2);
+
+                   }*/
+
+            url = url + "&key=AIzaSyDKWEhbRSKA6_k2uA5f1jsHwV70nOmN-jk";
+
+
+            ok = await fetch(url);
+
+            console.log(ok.url);
+
+        }
+
+
 
 
 
@@ -272,6 +326,13 @@
     </script>
 </head>
 <body>
-<div id="map"></div>
+<div id="map">
+
+
+
+</div>
+<div id="buttonDiv">
+    <button id="shotButton"></button>
+</div>
 </body>
 </html>
