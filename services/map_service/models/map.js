@@ -20,7 +20,6 @@ module.exports = async function(latmax,latmin,lngmax,lngmin){
             vector.push(inf);
 
         finalRes={datele:vector};
-        //finalRes={posts:[res[0].btrim,res[1].btrim,res[2].btrim,res[3].btrim,res[4].btrim]};
 
         console.log( JSON.stringify(finalRes));
 

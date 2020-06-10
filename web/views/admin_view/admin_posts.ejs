@@ -4,112 +4,17 @@
     <meta charset="UTF-8">
     <title>Login page AVI</title>
     <link rel="stylesheet" href="../stylesheet/loginpage.css">
-
-    <style>
-        .principal{
-            height:600px;width:700px; position:absolute;
-            left:50%;
-            top:50%;
-            transform: translate(-50%,-50%);
-            background-color: #fff2a8;
-
-        }
-        .scris{
-            color: #111122;
-            font-size: xx-large;
-            position:absolute;
-            left:50%;
-            top:+20px;
-            transform: translate(-50%,-50%);
-
-        }
-    </style>
-
-
-
-
+    <link rel="stylesheet" href="../stylesheet/admin/admin_posts.css">
 </head>
 <body class="background">
 
-
-
-
 <div class="principal">
-    <h1 class="scris">Start Page Posts</h1>
+    <h1 class="writing">Start Page Posts</h1>
 
-
-
-    <textarea style="height:400px;width:500px; position:absolute;
-            left:50%;
-            top:50%;
-            transform: translate(-50%,-50%); "
-    id="text"  >
-
-    </textarea>
-
-    <button onclick="myFunction()" style="position: relative; left:70%;top:85%; " class="dropbtn buton">Post</button>
-
-
-
-
-
+    <textarea class="text" id="text"  ></textarea>
+    <button onclick="myFunction()"class="dropbtn buton button_aspect">Post</button>
 
 </div>
-
+<script src="../javascript/admin/admin_posts.js"></script>
 </body>
-<script>
-    async function myFunction() {
-
-
-        var username="default";
-        ///username-ul urmeaza sa fie pasat prin cookie si apoi extras
-
-        var all_input = document.getElementById("text");
-        var msg ;
-
-        if (all_input.value !== "")
-            msg=all_input.value;
-
-        console.log("astrid");
-        console.log(msg);
-        let ok = await legatura(username,msg);
-        console.log(ok);
-////eventual redirectionare la  location.href="http://localhost:3000/start";
-
-    }
-
-
-
-    async function legatura(username,msg) {
-
-
-        var raw = JSON.stringify({"username":username, "message": msg});
-
-        var requestOptions = {
-            method: 'POST',
-            body: raw,
-            redirect: 'follow'
-        };
-
-        var ok = await fetch("http://localhost:3000/api/admin/posts", requestOptions)
-            .catch(error => console.log('error', error));
-
-
-/*        await ok.json().then(data=>{
-
-            let tokenul=data.token;
-
-            document.cookie="token="+ tokenul+"; expires="+new Date(new Date().getTime()+86409000).toUTCString();
-        });*/
-
-
-        console.log(ok);
-        console.log(ok.ok);
-        //console.log(ok.success);
-        return ok.ok;
-    }
-
-</script>
-
-
 </html>
