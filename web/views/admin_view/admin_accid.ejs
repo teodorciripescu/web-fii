@@ -6,240 +6,29 @@
 
     <link rel="stylesheet" type="text/css" href="../../stylesheet/TABEL_2.0.css">
     <link rel="stylesheet" type="text/css" href="../../stylesheet/loginpage.css">
-
-
-    <style>
-
-        .zero{
-
-            height:700px;width:1400px; position:absolute;
-            left:50%;
-            top:40%;
-            transform: translate(-50%,-50%);
-            background-color: #282828;
-            opacity: 0.9;
-            border-radius: 5px;
-
-        }
-
-        .principal{
-            height:550px;width:1250px; position:absolute;
-            left:50%;
-            top:50%;
-            transform: translate(-50%,-50%);
-            background-color:lightyellow;
-            border-radius: 5px;
-
-        }
-
-
-        .aspect_butoane{
-
-            position: relative; left:70%;top:90%; color: floralwhite; font-size: xx-large; background-color:#202020; width:75px;height:55px; opacity:0.95; border-radius:5px;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="../../stylesheet/admin/admin_accid.css">
 
 
 
 </head>
 <body class="background">
 
-
-
-
-
 <div class="zero">
 
-
     <div class="flex-container panel-body principal ">
-
         <table id="tabelul">
             <thead id="headul">
-            <tr id="rowul" >
-
-            </tr>
+            <tr id="rowul" ></tr>
             </thead>
             <tbody id="bodyul">
-
             </tbody>
         </table>
-
     </div>
 
-
-    <button onclick="inapoi()"  class=" aspect_butoane"><</button>
-    <button onclick="inainte()" class=" aspect_butoane">></button>
+    <button onclick="inapoi()"  class="aspect_butoane"><</button>
+    <button onclick="inainte()" class="aspect_butoane">></button>
 </div>
 </body>
-<script>
-
-    /*pot extrage numele coloanelor utilizand un query: select column_name from INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'nume_tabel'
-dar nu are sens
-*/
-
-    ///extract page
-    var page=1;
-    console.log(document.href);
-
-    var adresa=document.URL;
-    console.log(adresa);
-
-
-
-    var url = document.createElement('a');
-    url.href =adresa;
-    page=url.pathname;
-
-
-    var n=page.indexOf("=");
-    page=page.substring(n+1);
-
-    console.log("pagina: "+page);
-    console.log(url.pathname);
-
-    var raw = JSON.stringify({ "page": page});
-
-    var requestOptions = {
-        method: 'POST',
-        body: raw,
-        redirect: 'follow'
-    };
-
-    var ok = fetch("http://localhost:3000/api/admin/accid", requestOptions)
-        .catch(error => console.log('error', error));
-
-
-   // document.getElementById()
-
-
-
-    var coloane=["id",
-        "source",        "tmc",        "severity",        "start_time",        "end_time",        "start_lat",
-        "start_lng",        "end_lat",        "end_lng",        "distance",        "description",        "number",        "street",        "side",        "city",        "county",        "state",        "zipcode",        "country",
-        "timezone",        "airport_code",        "weather_timestamp",
-        "temperature",        "wind_chill",        "humidity",        "pressure",
-        "visibility",        "wind_direction","wind_speed","precipitation","weather_condition","amenity","bump","crossing","give_way","junction","no_exit","railway","roundabout","station","stop","traffic_calming","traffic_signal","turning_loop","sunrise_sunset","civil_twilight","nautical_twilight","astronomical_twilight"
-    ];
-
-
-
-    var tabel=document.getElementById("tabelul");
-    var tabelhead=document.getElementById("headul");
-    var tabelbody=document.getElementById("bodyul");
-    var tabelrow=document.getElementById("rowul");
-
-    for(var i=0;i<coloane.length;i++)
-    {let cap_tabel=document.createElement("th");
-    cap_tabel.innerText=coloane[i];
-    cap_tabel.className="responssive_tabel";
-    if(coloane[i]==='description')
-        cap_tabel.innerText="situation_description";
-
-
-    tabelrow.appendChild(cap_tabel);}
-    tabelhead.appendChild(tabelrow);
-    tabel.appendChild(tabelhead);
-  //  oContents[0].appendChild(cap_tabel);
-
-///vom crea 100 de randuri
-
-    for(var i=0;i<100;i++)
-    {    tabelrow=document.createElement("tr");
-            tabelrow.id=i;
-            tabelrow.style.background_color="red";
-        tabelbody.appendChild(tabelrow);
-        tabel.appendChild(tabelbody);
-    }
-
-
-
-
-    let celula_tabel;
-
-
-
-   console.log(ok);
-    console.log(ok.rezultat);
-
-    var m,p,elem;
-    console.log("de aici:");
-    ok.then(x=> {
-         x.json().then(y=>{
-
-             obj=y.rezultat;
-
-             console.log(obj);
-
-
-             for(var j=0;j<coloane.length;j++)
-             {m=p=0;
-
-            for(var i=1;i<=100;i++){
-                 console.log(m,p);
-             var cautat1='"'+coloane[j]+'"';
-             var cautat2='"'+coloane[j+1]+'"';
-
-
-
-
-                 m=obj.indexOf(cautat1,m+coloane[j].length);
-
-                 if(j!==coloane.length-1){
-                     p=obj.indexOf(cautat2,p+coloane[j+1].length);
-
-                     m=m+coloane[j].length+4;
-                     p=p-2;
-                     elem=obj.substring(m,p);
-                 }
-                 else
-                 {
-                     m=m+coloane[j].length+4;
-                     p=m+5;
-                     p=p-2;
-                     elem=obj.substring(m,p);
-                 }
-
-
-
-                celula_tabel=document.createElement("td");
-                celula_tabel.innerText=elem;
-                celula_tabel.className="responssive_tabel";
-
-                tabelrow=document.getElementById(i-1);
-                tabelrow.appendChild(celula_tabel);
-
-
-               //  console.log(elem);
-
-
-
-
-          }}
-
-         })});
-
-
-
-
-    var urm_pg=parseInt(page)+1;
-    var ant_pg=parseInt(page)-1;
-
-    function inainte() {
-
-
-        location.href="http://localhost:3000/admin/accid/id="+urm_pg;
-    }
-
-    function inapoi() {
-        //trimitere la alta pagina ce contine pagina urmatoare cu rezultate
-
-        if(page>1)
-        location.href="http://localhost:3000/admin/accid/id="+ant_pg;
-        else
-            alert("There is no previous page");
-    }
-</script>
-
+<script src="../../javascript/admin/admin_accid.js"></script>
 
 </html>

@@ -1,0 +1,49 @@
+.avi{
+    color:antiquewhite; position:absolute;
+    left:50%;
+    top:10%;
+    transform: translate(-50%,-50%);
+    font-size: 130px;
+
+}
+
+.avi-admin{
+    color:antiquewhite; position:relative;
+    left:50%;
+    top:20px;
+    transform: translate(-50%,-50%);
+    font-size: 30px;
+}
+
+@media only screen and (max-height: 810px){
+    .avi{
+        color:antiquewhite; position:absolute;
+        left:50%;
+        top:10%;
+        transform: translate(-50%,-50%);
+        font-size: 100px;
+
+    }
+
+    .avi-admin{
+        color:antiquewhite; position:relative;
+        left:50%;
+        top:20px;
+        transform: translate(-50%,-50%);
+        font-size: 20px;
+    }
+
+}
+
+@media only screen and (max-height: 730px){
+    .avi{
+        color:antiquewhite; position:absolute;
+        left:50%;
+        top:10%;
+        transform: translate(-50%,-50%);
+        font-size: 90px;
+
+    }
+
+
+}
