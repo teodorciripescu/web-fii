@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AVi Documentation</title>
+    <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
+    <script src="https://w3c.github.io/scholarly-html/js/scholarly.min.js"></script>
+</head>
+<body prefix="schema: http://schema.org">
+<header>
+    <h1>Documentatie</h1>
+</header>
+<div role="contentinfo">
+    <dl>
+        <dt>Autori</dt>
+        <dd>
+            Ciripescu Teodor
+            &amp;
+            Mocanu Ada-Astrid
+        </dd>
+        <dt>Repository GitHub</dt>
+        <dd>
+            <a href="https://github.com/teodorciripescu/web-fii">https://github.com/teodorciripescu/web-fii</a>
+        </dd>
+    </dl>
+</div>
+<section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+    <h2>Abstract</h2>
+    <p>
+        AVi (US Accidents Smart Visualizer) este o unealta de vizualizare a accidentelor din Statele Unite.
+        Acest document prezinta functionalitatile si detaliile dezvoltarii proiectului.
+    </p>
+</section>
+<section id="introduction" role="doc-introduction">
+    <!-- review? -->
+    <h2>Introducere</h2>
+    <p>
+        AVi pune la dispozitie statistici si vizualizari prin tabele, grafice si harti.
+        Toate acestea sunt generate flexibil, in functie de criteriile alese.
+        De asemenea, pot fi si descarcate in format CSV, PNG si SVG.
+
+    </p>
+    <p>
+        Site-ul se foloseste de un dataset ce este pus la dispozitie pe
+        <a href="https://www.kaggle.com/sobhanmoosavi/us-accidents#US_Accidents_Dec19.csv">kaggle</a>.
+    </p>
+</section>
+<section id="structure">
+    <h2>Structura</h2>
+    <p>
+        Proiectul abordeaza o arhitectura de tip MVC pe servicii cu API REST.
+        Structura generala a proiectului:
+    </p>
+    <img src="./project_structure.png">
+    <p>
+        Dupa cum putem observa, serviciile noastre sunt:
+    </p>
+    <ul>
+        <li>Web</li>
+        <li>Auth</li>
+        <li>Dataset</li>
+        <li>Map</li>
+        <li>Admin</li>
+        <li>News</li>
+    </ul>
+    <p>
+        Comunicarea intre servicii arata in felul urmator:
+    </p>
+    <img src="./service_structure.png">
+    <section id="Root">
+        <!-- review? -->
+        <h3>Serviciu</h3>
+        <p>
+            Fiecare serviciu are urmatoarele componente:
+        </p>
+        <ul>
+            <li>configs</li>
+            <li>controllers</li>
+            <li>middlewares</li>
+            <li>models</li>
+            <li>routes</li>
+            <li>utils</li>
+        </ul>
+        <p>
+            Serviciul Web, ce faciliteaza servirea in mod direct a clientului va contine in plus
+            componentele views si public.
+        </p>
+        <section id="configs">
+            <h4>Configs</h4>
+            <p>
+                Configs va contine 2 fisiere cu constante de configurari,
+                unul de development si unul de productie.
+            </p>
+        </section>
+        <section id="controllers">
+            <h4>Controllers</h4>
+            <p>
+                Controllerele vor fi cele care comunica cu functiile din model si trimit raspunsul inapoi clientului
+                in format JSON sau de pagina html(valabil doar pentru serviciul Web).
+            </p>
+        </section>
+        <section id="middlewares">
+            <h4>Middlewares</h4>
+            <p>
+                In middlewares vom gasi functii ce vor fi plasate pe anumite rute pentru a face verificari,
+                prelucrari ale requestului/raspunsului pana la ajungerea acestora in controller.
+                De exemplu, vom avea middlewares ce parseaza in JSON body-ul requesturilor, seteaza Headere
+                sau verifica daca clientul este autentificat si transmite mai departe identitatea sa.
+            </p>
+        </section>
+        <section id="models">
+            <h4>Models</h4>
+            <p>
+                In model este facuta comunicarea cu baza de date si diverse procesari de date.
+            </p>
+            <p>
+                De mentionat ca serviciul Web, in model, comunica cu celelalte servicii prin request-uri http.
+                Deci, nu comunica in mod direct cu baza de date.
+            </p>
+        </section>
+        <section id="routes">
+            <h4>Routes</h4>
+            <p>
+                In routes va fi decisa structura path-urilor din site, unde si ce middlewares vor fi apelate
+                si ce controller apartine fiecarei rute in parte.
+            </p>
+        </section>
+        <section id="utils">
+            <h4>Utils</h4>
+            <p>
+                Utils va contine functionalitati precum randarea paginilor templetizate de catre noi,
+                crearea, extragerea si decodarea token-urilor de autentificare.
+            </p>
+        </section>
+        <section id="views">
+            <h4>Views</h4>
+            <p>
+                Este specific serviciului Web si contine view-urile ce vor fi servite clinetului.
+            </p>
+        </section>
+        <section id="public">
+            <h4>Public</h4>
+            <p>
+                Tot specific serviciului Web, va avea in componenta toate fisiere ce sunt accesibile
+                in mod direct si public catre client.
+                Printre acestea se numara: fisiere css, imagini, javascript specific front-end.
+            </p>
+        </section>
+    </section>
+</section>
+<section id="service-description" >
+    <h1>Descrierea individuala a serviciilor</h1>
+    <p>
+        Urmeaza sa dezvoltam functionalitatile fiecarui serviciu in parte.
+    </p>
+    <section id="service-web">
+        <h1>Serviciul Web</h1>
+        <p>
+            Are rolul de a interactiona in mod direct cu clientul. Acesta va servi toate paginile catre
+            client si va servi si ca un intermediator al apelurilor API catre alte servicii. Astfel,
+            vom avea prezente rute pentru view-uri si pentru api. Aici vom dezvolta mai mult interactiunea
+            clientului cu paginile
+            (API-ul din acest serviciu este doar un man-in-the-middle pentru celelalte servicii).
+        </p>
+        <p>
+            Rute API(catre un anumit serviciu):
+        </p>
+        <ul>
+            <li>Admin (root /api/admin): /login, /posts, /manager, /internalInsert, /internalDelete, /accid</li>
+            <li>Auth (root /api/auth: /login, /register</li>
+            <li>Categories (root /api/categories: /, /suggestions</li>
+            <li>Data Queries (root /api/data_queries): /</li>
+            <li>Map (root /api/map): /</li>
+            <li>News (root /api/start): /</li>
+        </ul>
+        <p>
+            Rute pentru View-uri:
+        </p>
+        <ul>
+            <li>About (root /): /about</li>
+            <li>Admin (root /admin): /, /manager, /internal, /posts, /accid</li>
+            <li>Auth (root /): /login, /register, /logout</li>
+            <li>Columns Description (root /): /columns</li>
+            <li>Detailed Accident (root /): /accident</li>
+            <li>Main Page (root /): /</li>
+            <li>Map (root /): /map</li>
+            <li>Table (root /): /table</li>
+        </ul>
+        <section id="web-views">
+            <h2>View-uri</h2>
+            <p>
+                Folosim un template engine pentru a face render view-urilor. Am ales
+                aceasta abordare pentru a evita rescrierea de cod si pentru a avea sabloane ce pot fi
+                folosite in pagini diferite. Engine-ul folosit este <a href="https://ejs.co/">EJS</a>
+                (Embedded JavaScript). Folosim cod HTML5 si JavaScript.
+            </p>
+            <section id="web-views-mainpage">
+                <h4>Pagina principala</h4>
+                <p>
+
+                </p>
+            </section>
+            <section id="web-views-authpage">
+                <h4>Paginile de autentificare</h4>
+                <p>
+                    Vor fi compuse din formuri de login/register. Pentru register sunt necesare
+                    un username, o parola si un email valid. pentru login vor fi necesare username-ul si parola.
+                </p>
+            </section>
+            <section id="web-views-adminpage">
+                <h4>Paginile pentru Administrator</h4>
+                <p>
+
+                </p>
+            </section>
+            <section id="web-views-columndescpage">
+                <h4>Pagina cu descrierea coloanelor</h4>
+                <p>
+                    Pe aceasta pagina vor fi descrise toate coloanele (sinon. categorie, camp) ce definesc
+                    un accident.
+                </p>
+            </section>
+            <section id="web-views-statisticspage">
+                <h4>Pagina Statisticilor</h4>
+                <p>
+                    Aici putem vedea statistici customizate sub forma de chart-uri (line, bar, pie, calendar, map).
+                    In partea stanga(2/10 din latime) avem o zona in care ne putem alege multiplele criterii, iar in
+                    partea dreapta putem vizualiza statistica in forma de chart. Tot aici putem alege exportul
+                    datelor si resetarea criteriilor alese.
+                </p>
+                <p>
+                    Pentru graficele Line si Bar avem posibilitatea de a vizualiza mai multe statistici in
+                    acelasi grafic. Practic, ne alegem o axa comuna(X) iar apoi ne putem defini mai multe
+                    functii pe care sa le customizam separat.
+                </p>
+                <p>
+                    Pentru graficul Calendar avem aleasa axa X implicit ca fiind o zi din an. Axa Y o putem customiza
+                    fara constrangeri.
+                </p>
+                <p>
+                    Pentru graficul Pie putem alege o axa X, iar axa Y o putem personaliza
+                    fara constrangeri.
+                </p>
+                <p>
+                    Map are ca axa X cele 50 de state, iar axa Y, ca la toate celelalte grafice, poate fi aleasa intr-un
+                    mod mai profund.
+                </p>
+            </section>
+            <section id="web-views-detailedaccidentpage">
+                <h4>Pagina Accidentului Detaliat</h4>
+                <p>
+                    Pe aceasta pagina putem vizualiza toate detaliile unui anumit accident dat dupa un id
+                    (Ex: /accident?id=A-1).
+                </p>
+            </section>
+            <section id="web-views-tablepage">
+                <h4>Pagina Accidententelor Tabelate</h4>
+                <p>
+                    Ne afiseaza sub forma de tabel accidente dupa anumite criterii alese de catre client.
+                    La fiecare schimbare de criterii, tabelul este reimprospatat. Zona alegerilor criteriilor
+                    este aceeasi cu cea de pe pagina cu statisticile.
+                </p>
+            </section>
+            <section id="web-views-mappage">
+                <h4>Pagina Hartii</h4>
+                <p>
+
+                </p>
+            </section>
+            <section id="web-views-aboutpage">
+                <h4>Pagina cu Informatii despre Proiect</h4>
+                <p>
+                    Pe aceasta pagina puteti gasi autorii proiectului, documentatia si repository-ul de GitHub.
+                </p>
+            </section>
+        </section>
+        <section id="web-api">
+            <h3>API</h3>
+            <p>
+                Dupa cum am mentionat mai sus, API-ul dezvoltat la acest serviciu reprezinta doar o madalitate
+                de a trimite request-ul catre serviciile ce vor face 'heavy-lifting'.
+                Aceasta abordare ne ajuta in cazurile in care dorim sa facem apeluri AJAX din front-end
+                (evitam probleme referitoare la CORS).
+            </p>
+        </section>
+    </section>
+    <section id="service-auth">
+        <h2>Serviciul Auth</h2>
+        <p> Are 2 functionalitati simple: login, register. </p>
+        <p>
+            POST la '/auth/login' <br>
+            Body-ul va fi format din username si password. Dupa ce se verifica ca acestea sunt valide,
+             se intoarce un raspuns ce va contine un token de tip JWT (JSON Web Token). Token-ul primit
+             va trebui salvat intr-un cookie pentru a accesa rute protejate. Durata de viata a acestuia
+            este de 30 de zile.
+            In cazul in care datele introduse nu sunt valide, raspunsul va semnala acest lucru.
+        </p>
+        <p>
+            POST la '/auth/register' <br>
+            Body-ul va fi format din username, password si email. Dupa ce se verifica ca acestea sunt valide,
+            sunt inserate in baza de date si se intoarce un raspuns ce va contine un token de tip JWT. Se procedeaza ca
+            la login.
+            In cazul in care datele introduse nu sunt valide, raspunsul va semnala acest lucru.
+        </p>
+    </section>
+    <section id="service-dataset">
+        <h2>Serviciul Dataset</h2>
+        <p>
+            In acest serviciu ne ocupam de lucrul cu dataset-ul de accidente
+             (acesta este urcat intr-o baza de date PostgreSQL). Avem functionalitati precum
+        generarea dinamica de categorii multi-criteriale, generarea de statistici in functie de aceste criterii,
+            extragerea de accidente in format bulk sau singular.
+            Aceasta 'generare dinamica de categorii' a fost realizata prin impartirea lor in 4 categorii logice:
+            categorii simple(ce pot fi alese printr-un checkbox, ex. alegerea unui timezone), categorii interval(ce pot fi definite prin darea
+            unui interval, ex. 10-20 precipitatii, un interval calendaristic), categorii dropdown (utilizatorul scrie un
+            inceput al inputului, iar noi ii sugeram variante valide, ex. inceputul numelui unui oras) si categorii
+            explicite (pentru informatii ce ar trebui sa fie exacte, precum id-ul unui accident: A-10).
+        </p>
+        <p>
+            De asemenea, categoriile ce au numarul de valori unice restrans (cu toate ca avem 3 milioane de inregistrari,
+             valorile din anumite campuri se repeta), sunt salvate pe disc si incarcate la nevoie
+            pentru a fi servite clientului cat mai repede.
+        </p>
+        <section id="service-dataset-routes">
+            <h2>Rute API</h2>
+            <p>Se pot face apeluri la urmatoarele rute:</p>
+            <p>
+                GET la '/'<br>
+                Vom primi ca raspuns un array cu obiecte ce vor contine categoriile ce urmeaza a fi incarcate
+                in paginile cu statistici/tabele. In acest mod facilitam o generare dinamica a field-urilor
+                ce se regasesc in cautarea multi-criteriala.<br>
+                <img style="height: 250px" src="./category_json.png">
+            </p>
+            <p>
+                GET la '/categories/suggestion?category=CHOSEN_CATEGORY&input=PREFIX'<br>
+                Vom primi ca raspuns un array de maxim 50 de elemente ce vor contine sugestii pentru
+                un anumit camp. <br>De exemplu, daca facem apelul la: '/categories/suggestion?category=city&input=can'<br>
+                vom primi ['Cana','Canaan',...,'Canyonville'].
+            </p>
+
+            <p>
+                POST la '/data_queries'<br>
+                Vom trimite ca body un JSON ce va transmite serverului ce tip de statistica dorim sa primim
+                inapoi. Obiectul va contine 2 field-uri principale "chart"(ce va contine la randul sau
+                informatii precum tipul chart-ului, axa X aleasa,etc.) si "options"( un array cu optiunile alese
+                pentru axa Y; o astfel de optiune contine key, category_type, value). <br>
+                Raspunsul va fi format din statistica ceruta: valori distincte ale axei X si numarul de aparitii
+                dupa ce au fost filtrate de criteriile oferite in field-ul options din request.<br>
+                Request:<br>
+                <img style="height: 250px" src="./request_statistic.png"><br>
+                Response:<br>
+                <img style="height: 250px" src="./response_statistic.png">
+            </p>
+            <p>
+                GET la '/accident?id=ACC_ID'<br>
+                Vom primi ca raspuns un obiect cu detalii legate de un accident specific (48 de campuri).
+            </p>
+        </section>
+    </section>
+    <section id="service-map">
+        <h2>Serviciul Map</h2>
+        <p></p>
+    </section>
+    <section id="service-admin">
+        <h2>Serviciul Admin</h2>
+        <p></p>
+    </section>
+    <section id="service-news">
+        <h2>Serviciul News</h2>
+        <p></p>
+    </section>
+</section>
+<section id="tech-stack">
+    <h2>Tehnologii Folosite</h2>
+    <p>Pe partea de backend am folosit Node.js, JavaScript si PostgreSQL, iar pe frontend HTML5, CSS, JavaScript.</p>
+    <section id="libs">
+        <h2>Biblioteci</h2>
+        <p>Backend:</p>
+        <ul>
+            <li><a href="https://www.npmjs.com/package/router">router</a> - biblioteca de rutare, folosita de asemenea pentru a implementa middlewares</li>
+            <li><a href="https://www.npmjs.com/package/pg-promise">pg-promise</a> - faciliteaza conexiunea cu baza de date</li>
+            <li><a href="https://www.npmjs.com/package/dotenv">dotenv</a> - pentru implementarea fisierelor de configurari</li>
+            <li><a href="https://www.npmjs.com/package/ejs">ejs</a> - templetizarea view-urilor</li>
+            <li><a href="https://www.npmjs.com/package/jsonwebtoken">jsonwebtoken</a> - pentru generarea si decodificarea de token-uri</li>
+            <li><a href="https://www.npmjs.com/package/bcrypt">bcrypt</a> - genereaza hash-uri pentru parolele stocate in baza de date</li>
+            <li><a href="https://www.npmjs.com/package/serve-static">serve-static</a> - necesara pentru servirea de fisiere catre client (imagini, CSS, cod JavaScript)</li>
+            <li><a href="https://www.npmjs.com/package/mime">mime</a> - pentru a comunica formatul fisierelor</li>
+            <li><a href="https://www.npmjs.com/package/event-stream">event-stream</a> - ajuta la manipularea streamului
+                de date primit la citirea Dataset-ului cu accidente ce urmeaza a fi urcat in baza de date</li>
+            <li><a href="https://www.npmjs.com/package/sql">sql</a> - folosit la concatenarea query-urilor sql (necesar pt momentul upload-ului dataset-ului)</li>
+        </ul>
+
+        <p>Frontend:</p>
+        <ul>
+            <li><a href="https://developers.google.com/chart">google charts</a> - pentru afisarea graficelor</li>
+            <li><a href="http://html2canvas.hertzen.com/">html2canvas</a> - faciliteaza exportul chart-urilor in PNG</li>
+            <li><a href="http://danml.com/download.html">download.js</a> - necesar descarcarii fisierelor ce contin datele exportate</li>
+        </ul>
+    </section>
+</section>
+<section id="manage-source-code">
+    <h1>Management cod-sursa</h1>
+    <p>
+        Pentru managementul codului sursa am folosit git si GitHub. Am lucrat pe branch-uri separate, pe task-uri
+        separate. Am structurat proiectul in asa fel incat sa fie evitate conflictele cu cat mai mult cu putinta.
+        Cand devenea necesar accesul la munca celuilalt sau doream sa integram ceva, cream un pull request pentru
+        a face merge cu branch-ul Master si ne aduceam noile schimbari la noi in branch.
+    </p>
+</section>
+<section id="task-distr">
+    <h1>Distributia task-urilor</h1>
+    <p>
+        O parte semnificativa din munca a fost facuta in comun, prin discutii si efectiv scriere de cod.<br>
+        In ceea ce urmeaza vom enumera sectiunile la care a lucrat fiecare separat (in o masura cat mai ridicata).
+    </p>
+    <section id="taskdistr-teo">
+        <h2>Ciripescu Teodor</h2>
+        <ul>
+            <li> Serviciul Dataset</li>
+            <li> Serviciul Auth</li>
+            <li> Implementarea sistemului de rute, middlewares si servire fisiere</li>
+            <li> Utilitarul de tokenizare</li>
+            <li> Stabilirea fisierelor de configurare</li>
+            <li> Pagina de statistici cu chart-uri(exceptie facand design-ul sidebarului de customizare) </li>
+            <li> Pagina de explicare a categoriilor </li>
+            <li> Pagina cu afisare tabelara a accidentelor </li>
+            <li> Pagina de afisare a unui accident </li>
+            <li> Templetizarea paginilor html</li>
+        </ul>
+    </section>
+    <section id="taskdistr-ada">
+        <h2>Mocanu Ada-Astrid</h2>
+        <ul>
+            <li> Seviciul Admin</li>
+            <li> Seviciul Map</li>
+            <li> Seviciul News</li>
+            <li> Pagina Start</li>
+            <li> Pagini Admin</li>
+            <li> Pagina Login</li>
+            <li> Pagina Register</li>
+            <li> Pagini Harti</li>
+            <li> </li>
+        </ul>
+    </section>
+</section>
+<section id="multimedia-content">
+    <h1>Continuturi multimedia aferente</h1>
+    <p>
+        Am urcat un video pe YouTube cu prezentarea aplicatiei la link-ul urmator: <br>
+        <a href="">....</a>
+    </p>
+</section>
+
+<section id="bibliograph-ref">
+    <h1>Bibliografie</h1>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></li>
+        <li><a href="https://developers.google.com/chart/interactive/docs/gallery/linechart">https://developers.google.com/chart/interactive/docs/gallery/linechart</a></li>
+        <li><a href="https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp">https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp</a></li>
+        <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li>
+    </ul>
+</section>
+</body>
+</html>

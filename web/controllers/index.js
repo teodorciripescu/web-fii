@@ -18,3 +18,4 @@ exports.viewStatisticsController = require('./view_controllers/viewStatisticsCon
 exports.viewTableController = require('./view_controllers/viewTableController');
 exports.viewDetailedAccident = require('./view_controllers/viewDetailedAccident');
 exports.viewColumnsDescriptionController = require('./view_controllers/viewColumnsDescriptionController');
+exports.viewAboutController = require('./view_controllers/viewAboutController');

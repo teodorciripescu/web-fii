@@ -35,4 +35,7 @@ router.use('/table', table);
 const detailedAccident = require('./detailedAccident');
 router.use('/accident', detailedAccident);
 
+const about = require('./about');
+router.use('/about', about);
+
 module.exports = router;

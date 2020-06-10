@@ -13,5 +13,8 @@ function drawChart(){
         case 'Pie Chart':
             drawPieChart();
             break;
+        case 'Map Chart':
+            drawMapChart();
+            break;
     }
 }
