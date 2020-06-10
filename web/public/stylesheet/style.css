@@ -35,7 +35,9 @@ body{
         width: 100%;
     }
 }
-
+.wrapper-item{
+    flex: 1
+}
 .flex-element-choicebar {
     flex: 2;
     /*max-height: 100vh;*/
