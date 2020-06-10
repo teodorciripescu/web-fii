@@ -163,6 +163,9 @@
                     var latits=[];
                     var longs=[];
 
+                    var latits2=[];
+                    var longs2=[];
+
                     var m,p,elem;
 
 
@@ -200,18 +203,24 @@
 
 
                                     if (coloane[j] === "start_lat")
-                                       latits.push(elem);
+                                    {latits.push(elem);
+                                    latits2.push(elem);}
                                     if (coloane[j] === "start_lng")
-                                       longs.push(elem);
+                                    {longs.push(elem);
+                                    longs2.push(elem);}
 
                                     info[j].push(elem);
 
                                 }
                             }
 
+
+
+
                             var shotButton=document.getElementById("shotButton");
                             console.log(shotButton);
-                            shotButton.addEventListener("click",()=>mapShot(Number(latit),Number(long),latits,longs));
+                            shotButton.addEventListener("click",()=>mapShot(Number(latit),Number(long),latits2,longs2));
+
 
 
 
@@ -298,15 +307,18 @@
             var url = "https://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&zoom=10&size=1200x1000&maptype=roadmap";
             /* var ref="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=8&size=800x500&maptype=roadmap" ;*/
 
+            console.log(latits);
+            console.log(longs);
+
             ///adaugarea tuturor markerilor
-            /*       while(latits.length&&longs.length){
+                   while(latits.length&&longs.length){
 
                        l1=latits.pop();
                        l2=longs.pop();
 
                              url=url+"&markers=color:blue%7C" +Number(l1)+","+Number(l2);
 
-                   }*/
+                   }
 
             url = url + "&key=AIzaSyDKWEhbRSKA6_k2uA5f1jsHwV70nOmN-jk";
 
