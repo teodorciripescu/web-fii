@@ -198,6 +198,7 @@
             <section id="web-views-mainpage">
                 <h4>Pagina principala</h4>
                 <p>
+                    Pagina menita sa intampine utilizatorul, furnizandu-i acces la ultimele postari publicate de catre admini.
 
                 </p>
             </section>
@@ -205,13 +206,30 @@
                 <h4>Paginile de autentificare</h4>
                 <p>
                     Vor fi compuse din formuri de login/register. Pentru register sunt necesare
-                    un username, o parola si un email valid. pentru login vor fi necesare username-ul si parola.
+                    un username, o parola si un email valid. Pentru login vor fi necesare username-ul si parola.
                 </p>
             </section>
             <section id="web-views-adminpage">
                 <h4>Paginile pentru Administrator</h4>
+                    <h5>Pagina de autentificare</h5>
                 <p>
-
+                    Furnizeaza administratorilor accesul la restul facilitatilor care le sunt disponibile.
+                </p>
+                <h5>Pagina optiunilor</h5>
+                <p>
+                    Joaca rolul de meniul, oferind administratorului posibilitatea de a alege de care facilitate are nevoie.
+                </p>
+                <h5>Pagina de managerierea administratorilor</h5>
+                <p>
+                    Permite crearea si stergerea din baza de date a conturilor cu privilegiul de administrator.
+                </p>
+                <h5>Pagina de vizualizare a datelor tuturor accidentelor</h5>
+                <p>
+                    Pagina permite vizualizarea paginata a tuturor accidentelor.
+                </p>
+                <h5>Pagina de scriere a postarilor</h5>
+                <p>
+                    Faciliteaza scrierea de postari ce vor fi introduse in baza de date spre a fi afisate pe pagina de start sub forma de news.
                 </p>
             </section>
             <section id="web-views-columndescpage">
@@ -265,6 +283,10 @@
             <section id="web-views-mappage">
                 <h4>Pagina Hartii</h4>
                 <p>
+                    Intrand pe pagina hartii utilizatorul poate sa aleaga o locatie despre care doreste sa afle informatii legate de accidentele petrecute.
+                    Utilizatorul da click pe o locatie, urmand ca harta sa se mareasca si sa ofere markere ce reprezinta locatia unde s-a produs un accident, in zona aleasa de utilizator.
+                    Dand click pe unul din aceste markere, utilizator primeste niste informatii elementare despre accidentul petrecut,alaturi de un link catre pagina detaliata a accidentului, pentru a putea afla mai multe detalii.
+                    De asemenea, apasand pe butonul 'Take a shot', se ofera un link catre o redare statica a accidentelor din ultima cautare.
 
                 </p>
             </section>
@@ -278,7 +300,7 @@
         <section id="web-api">
             <h3>API</h3>
             <p>
-                Dupa cum am mentionat mai sus, API-ul dezvoltat la acest serviciu reprezinta doar o madalitate
+                Dupa cum am mentionat mai sus, API-ul dezvoltat la acest serviciu reprezinta doar o modalitate
                 de a trimite request-ul catre serviciile ce vor face 'heavy-lifting'.
                 Aceasta abordare ne ajuta in cazurile in care dorim sa facem apeluri AJAX din front-end
                 (evitam probleme referitoare la CORS).
@@ -360,15 +382,52 @@
     </section>
     <section id="service-map">
         <h2>Serviciul Map</h2>
-        <p></p>
+        <p>
+            Dand click pe harta se face un apel la un API furnizat de Google Maps (Maps JavaScript API). Rezultatul il constituie coordonatele intoarse care sunt folosite (convertite la JSON)
+            ca 'seed' pentru apelul catre baza de date. 'Seed-ul' reprezinta centrul zonei in care se vor cauta accidente. Baza de date cauta accidentele din proximitate si le returneaza pe ultimele inregistrate.
+            Trimise tot ca JSON-uri,acestea sunt parsate si utilizate atat pentru a obtine markere pentru identificarea locatiei accidentelor,cat si pentru informatiile puse la dispozitie prin apasarea pe un marker.
+            <br>De asemenea, in cazul utilizarii butonului 'Take a shot' se va recurge la apelarea unui alt API Google Maps (Static Maps API), in cadrul careia,
+            preluandu-se ultimul punct/zona cautata se furnizeaza o imagine statica a zonei alaturi de markerele aferente, refacandu-se apel la baza de date in acelasi mod.
+            <br>Pentru a ilustra mai bine ideea ca s-au folosit doua modalitati de redare cartografica a datelor, am optat pentru colorarea cu rosu, respectiv albastru a markerelor in functie de API-ul utilizat.
+
+        </p>
     </section>
     <section id="service-admin">
         <h2>Serviciul Admin</h2>
-        <p></p>
+        <h3>Autenificarea</h3>
+        <p>
+           Verifica inca de la tastare elemente de corectitudine a datelor introduse (formatul email-ului,completarea tuturor campurilor),
+            urmand sa trimita catre baza de date informatiile si sa redirecteze catre urmatoarele pagini daca e corect, sau sa pastreze utilizatorul pe pagina curenta in caz contrar
+        </p>
+        <h3>Optiunile</h3>
+        <p>
+           Fiecare buton cu optiune trimite catre una dintre functionalitatile aferente, printr-un apel AJAX ca GET request.
+        </p>
+        <h3>Accidentele</h3>
+        <p>
+            Preluate din baza de date printr-un GET request, accidentele parsate din formatul JSON si adaugate intr-un tabel, pagina cu pagina.
+            O pagina a tabelului contine pana la 100 de accidente pentru facilitarea vizualizarii si pentru a nu solicita inutil baza de date.
+            (/admin/accid/id=x, unde x reprezinta nr paginii)
+
+        </p>
+        <h3>Administratorii</h3>
+        <p>
+
+            Se trimit prin POST request datele despre un administrator care urmeaza a fi creat sau sters printr-un JSON si se executa operatiile necesare pe baza de date,
+            gestionand erorile si intorcand confirmarile necesare.
+
+        </p>
+        <h3>Postarile</h3>
+        <p>
+            POST request-uri catre api ce introduce intr-o tabela 'posts' din baza de date numele utilizatorului administrator, postarea abia scrisa si un element temporal.
+            Postarile sunt trimise si preluate din baza de date in format JSON, parsate si utilizate in Pagina de start.
+        </p>
     </section>
     <section id="service-news">
         <h2>Serviciul News</h2>
-        <p></p>
+        <p>
+            Pentru incarcare se face un GET request la API-ul propriu ce extrage din baza de date ultimele 5 anunturi ale administratorilor. Cererea se face cadre path-ul: ' /api/start'
+        </p>
     </section>
 </section>
 <section id="tech-stack">
@@ -396,6 +455,8 @@
             <li><a href="https://developers.google.com/chart">google charts</a> - pentru afisarea graficelor</li>
             <li><a href="http://html2canvas.hertzen.com/">html2canvas</a> - faciliteaza exportul chart-urilor in PNG</li>
             <li><a href="http://danml.com/download.html">download.js</a> - necesar descarcarii fisierelor ce contin datele exportate</li>
+            <li><a href="https://maps.googleapis.com/maps/api/js">dynamic google maps </a> - pentru afisarea uneia dintre tipurile de harti</li>
+            <li><a href="https://maps.googleapis.com/maps/api/staticmap">static google maps </a> - pentru afisarea tipului de harta static</li>
         </ul>
     </section>
 </section>
@@ -412,7 +473,7 @@
     <h1>Distributia task-urilor</h1>
     <p>
         O parte semnificativa din munca a fost facuta in comun, prin discutii si efectiv scriere de cod.<br>
-        In ceea ce urmeaza vom enumera sectiunile la care a lucrat fiecare separat (in o masura cat mai ridicata).
+        In ceea ce urmeaza vom enumera sectiunile la care a lucrat fiecare separat (intr-o masura cat mai ridicata).
     </p>
     <section id="taskdistr-teo">
         <h2>Ciripescu Teodor</h2>
@@ -432,15 +493,15 @@
     <section id="taskdistr-ada">
         <h2>Mocanu Ada-Astrid</h2>
         <ul>
-            <li> Seviciul Admin</li>
-            <li> Seviciul Map</li>
-            <li> Seviciul News</li>
+            <li> Seviciul Admin, incluzand: autentificarea si gestionarea adminilor,facilitarea crearii postarilor si vizualizarea paginata a accidentelor</li>
+            <li> Seviciul Map, dinamic si static</li>
+            <li> Seviciul News al paginii de start</li>
             <li> Pagina Start</li>
             <li> Pagini Admin</li>
             <li> Pagina Login</li>
             <li> Pagina Register</li>
             <li> Pagini Harti</li>
-            <li> </li>
+            <li> Elemente de design</li>
         </ul>
     </section>
 </section>
@@ -459,6 +520,13 @@
         <li><a href="https://developers.google.com/chart/interactive/docs/gallery/linechart">https://developers.google.com/chart/interactive/docs/gallery/linechart</a></li>
         <li><a href="https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp">https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp</a></li>
         <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li>
+        <li><a href="https://www.w3schools.com/howto/howto_js_dropdown_sidenav.asp">https://www.w3schools.com/howto/howto_js_dropdown_sidenav.asp</a></li>
+        <li><a href="https://www.w3schools.com/Css/css_dropdowns.asp">https://www.w3schools.com/Css/css_dropdowns.asp</a></li>
+        <li><a href="https://developers.google.com/maps/documentation/javascript/interaction">https://developers.google.com/maps/documentation/javascript/interaction</a></li>
+        <li><a href="https://developers.google.com/maps/documentation/javascript/markers">https://developers.google.com/maps/documentation/javascript/markers</a></li>
+        <li><a href="https://developers.google.com/maps/documentation/maps-static/dev-guide">https://developers.google.com/maps/documentation/maps-static/dev-guide</a></li>
+        <li><a href="https://developers.google.com/maps/documentation/javascript/examples/event-click-latlng">https://developers.google.com/maps/documentation/javascript/examples/event-click-latlng</a></li>
+        <li><a href="https://developers.google.com/maps/documentation/javascript/examples/map-coordinates">https://developers.google.com/maps/documentation/javascript/examples/map-coordinates</a></li>
     </ul>
 </section>
 </body>
