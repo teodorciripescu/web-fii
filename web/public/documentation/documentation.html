@@ -44,9 +44,6 @@
     <p>
         Site-ul se foloseste de un dataset ce este pus la dispozitie pe
         <a href="https://www.kaggle.com/sobhanmoosavi/us-accidents#US_Accidents_Dec19.csv">kaggle</a>.
-        <!-- TODO mutat la baza de date -->
-        Unealta noastra faciliteaza urcarea acestui dataset intr-o baza de date (PostgreSQL)
-        pentru a putea fi accesat de catre serviciile dezvoltate.
     </p>
 </section>
 <section id="structure">
@@ -290,12 +287,28 @@
     </section>
     <section id="service-auth">
         <h2>Serviciul Auth</h2>
-        <p></p>
+        <p> Are 2 functionalitati simple: login, register. </p>
+        <p>
+            POST la '/auth/login' <br>
+            Body-ul va fi format din username si password. Dupa ce se verifica ca acestea sunt valide,
+             se intoarce un raspuns ce va contine un token de tip JWT (JSON Web Token). Token-ul primit
+             va trebui salvat intr-un cookie pentru a accesa rute protejate. Durata de viata a acestuia
+            este de 30 de zile.
+            In cazul in care datele introduse nu sunt valide, raspunsul va semnala acest lucru.
+        </p>
+        <p>
+            POST la '/auth/register' <br>
+            Body-ul va fi format din username, password si email. Dupa ce se verifica ca acestea sunt valide,
+            sunt inserate in baza de date si se intoarce un raspuns ce va contine un token de tip JWT. Se procedeaza ca
+            la login.
+            In cazul in care datele introduse nu sunt valide, raspunsul va semnala acest lucru.
+        </p>
     </section>
     <section id="service-dataset">
         <h2>Serviciul Dataset</h2>
         <p>
-            In acest serviciu ne ocupam de lucrul cu dataset-ul de accidente. Avem functionalitati precum
+            In acest serviciu ne ocupam de lucrul cu dataset-ul de accidente
+             (acesta este urcat intr-o baza de date PostgreSQL). Avem functionalitati precum
         generarea dinamica de categorii multi-criteriale, generarea de statistici in functie de aceste criterii,
             extragerea de accidente in format bulk sau singular.
             Aceasta 'generare dinamica de categorii' a fost realizata prin impartirea lor in 4 categorii logice:
@@ -303,6 +316,11 @@
             unui interval, ex. 10-20 precipitatii, un interval calendaristic), categorii dropdown (utilizatorul scrie un
             inceput al inputului, iar noi ii sugeram variante valide, ex. inceputul numelui unui oras) si categorii
             explicite (pentru informatii ce ar trebui sa fie exacte, precum id-ul unui accident: A-10).
+        </p>
+        <p>
+            De asemenea, categoriile ce au numarul de valori unice restrans (cu toate ca avem 3 milioane de inregistrari,
+             valorile din anumite campuri se repeta), sunt salvate pe disc si incarcate la nevoie
+            pentru a fi servite clientului cat mai repede.
         </p>
         <section id="service-dataset-routes">
             <h2>Rute API</h2>
@@ -352,6 +370,93 @@
         <h2>Serviciul News</h2>
         <p></p>
     </section>
+</section>
+<section id="tech-stack">
+    <h2>Tehnologii Folosite</h2>
+    <p>Pe partea de backend am folosit Node.js, JavaScript si PostgreSQL, iar pe frontend HTML5, CSS, JavaScript.</p>
+    <section id="libs">
+        <h2>Biblioteci</h2>
+        <p>Backend:</p>
+        <ul>
+            <li><a href="https://www.npmjs.com/package/router">router</a> - biblioteca de rutare, folosita de asemenea pentru a implementa middlewares</li>
+            <li><a href="https://www.npmjs.com/package/pg-promise">pg-promise</a> - faciliteaza conexiunea cu baza de date</li>
+            <li><a href="https://www.npmjs.com/package/dotenv">dotenv</a> - pentru implementarea fisierelor de configurari</li>
+            <li><a href="https://www.npmjs.com/package/ejs">ejs</a> - templetizarea view-urilor</li>
+            <li><a href="https://www.npmjs.com/package/jsonwebtoken">jsonwebtoken</a> - pentru generarea si decodificarea de token-uri</li>
+            <li><a href="https://www.npmjs.com/package/bcrypt">bcrypt</a> - genereaza hash-uri pentru parolele stocate in baza de date</li>
+            <li><a href="https://www.npmjs.com/package/serve-static">serve-static</a> - necesara pentru servirea de fisiere catre client (imagini, CSS, cod JavaScript)</li>
+            <li><a href="https://www.npmjs.com/package/mime">mime</a> - pentru a comunica formatul fisierelor</li>
+            <li><a href="https://www.npmjs.com/package/event-stream">event-stream</a> - ajuta la manipularea streamului
+                de date primit la citirea Dataset-ului cu accidente ce urmeaza a fi urcat in baza de date</li>
+            <li><a href="https://www.npmjs.com/package/sql">sql</a> - folosit la concatenarea query-urilor sql (necesar pt momentul upload-ului dataset-ului)</li>
+        </ul>
+
+        <p>Frontend:</p>
+        <ul>
+            <li><a href="https://developers.google.com/chart">google charts</a> - pentru afisarea graficelor</li>
+            <li><a href="http://html2canvas.hertzen.com/">html2canvas</a> - faciliteaza exportul chart-urilor in PNG</li>
+            <li><a href="http://danml.com/download.html">download.js</a> - necesar descarcarii fisierelor ce contin datele exportate</li>
+        </ul>
+    </section>
+</section>
+<section id="manage-source-code">
+    <h1>Management cod-sursa</h1>
+    <p>
+        Pentru managementul codului sursa am folosit git si GitHub. Am lucrat pe branch-uri separate, pe task-uri
+        separate. Am structurat proiectul in asa fel incat sa fie evitate conflictele cu cat mai mult cu putinta.
+        Cand devenea necesar accesul la munca celuilalt sau doream sa integram ceva, cream un pull request pentru
+        a face merge cu branch-ul Master si ne aduceam noile schimbari la noi in branch.
+    </p>
+</section>
+<section id="task-distr">
+    <h1>Distributia task-urilor</h1>
+    <p>
+        O parte semnificativa din munca a fost facuta in comun, prin discutii si efectiv scriere de cod.<br>
+        In ceea ce urmeaza vom enumera sectiunile la care a lucrat fiecare separat (in o masura cat mai ridicata).
+    </p>
+    <section id="taskdistr-teo">
+        <h2>Ciripescu Teodor</h2>
+        <ul>
+            <li> Serviciul Dataset</li>
+            <li> Serviciul Auth</li>
+            <li> Implementarea sistemului de rute, middlewares si servire fisiere</li>
+            <li> Utilitarul de tokenizare</li>
+            <li> Stabilirea fisierelor de configurare</li>
+            <li> Pagina de statistici cu chart-uri(exceptie facand design-ul sidebarului de customizare) </li>
+            <li> Pagina de explicare a categoriilor </li>
+            <li> Pagina cu afisare tabelara a accidentelor </li>
+            <li> Pagina de afisare a unui accident </li>
+            <li> Templetizarea paginilor html</li>
+        </ul>
+    </section>
+    <section id="taskdistr-ada">
+        <h2>Mocanu Ada-Astrid</h2>
+        <ul>
+            <li> Seviciul Admin</li>
+            <li> Seviciul Map</li>
+            <li> Seviciul News</li>
+            <li> Pagina Start</li>
+            <li> Pagini Admin</li>
+            <li> Pagina Login</li>
+            <li> Pagina Register</li>
+            <li> Pagini Harti</li>
+            <li> </li>
+        </ul>
+    </section>
+</section>
+<section id="multimedia-content">
+    <h1>Continuturi multimedia aferente</h1>
+    <p>
+        Am urcat un video pe YouTube cu prezentarea aplicatiei la link-ul urmator: <br>
+        <a href="">....</a>
+    </p>
+</section>
+
+<section id="references">
+    <h1>References</h1>
+    <ul>
+        <li></li>
+    </ul>
 </section>
 </body>
 </html>
