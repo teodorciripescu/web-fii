@@ -1,9 +1,24 @@
-var oContent = document.getElementById('DynamicContent');
-legatura();
-
+// var oContent = document.getElementById('DynamicContent');
+// legatura();
+loadNews();
 ///facem trimitere la baza de date -tabela: posts si extragem ultimele 5 postari si le afisam
 
+async function loadNews() {
+    var ok = await fetch("/api/start")
+        .catch(error => console.log('error', error));
 
+
+    console.log(ok);
+    ok.json().then(x => {
+        let obj = x.data.rezultat;
+        var newsDiv = document.getElementById('latest-news');
+        var news = '';
+        for (let i = 0; i < obj.length; i++) {
+            news += `<header><h2>Admin post ${i+1}</h2></header><section><p>${obj[i]}</p></section>`;
+        }
+        newsDiv.innerHTML = news;
+    });
+}
 
 async function legatura() {
 

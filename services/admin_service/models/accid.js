@@ -6,7 +6,7 @@ const db = require('./connection');
 module.exports = async function(page){
     let res, sql, conn,finalRes;
 
-    console.log("paginaaa:"+page);
+    //console.log("paginaaa:"+page);
     sql = "select * from accidents order by id asc limit 100 offset "+(page-1)*100;
 
 

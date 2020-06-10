@@ -1,12 +1,16 @@
+.article-container {
+    color: white;
+}
 .avi{
-    color:antiquewhite; position:absolute;
+    color:antiquewhite;
+    position:absolute;
     left:50%;
     top:10%;
     transform: translate(-50%,-50%);
     font-size: 130px;
 }
 .avi-container{
-    width:100%;
+    width:80vw;
     height: 30em;
     background-color: #fff2a8;
     border-radius:15px;
@@ -17,8 +21,8 @@
 
 .posts{
 
-    width:80em;
-    padding-left: 5em;
+    /*width:80em;*/
+    /*padding-left: 5em;*/
 
 }
 

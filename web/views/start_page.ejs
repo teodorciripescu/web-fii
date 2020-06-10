@@ -8,16 +8,34 @@
     <link rel="stylesheet" href="../stylesheet/loginpage.css">
     <link rel="stylesheet" type="text/css" href="../../stylesheet/home/startpage.css">
 
+    <link rel="stylesheet" type="text/css" href="stylesheet/style.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/navbar.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/footer.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/columns_explained.css">
     <title> Home </title>
 
 </head>
-<body class="color-bkground">
+<body class="background">
+<div class="wrapper">
+    <header>
+        <%- include('common/navbar');%>
+    </header>
+    <div style="flex: 1;">
+        <div class="flex">
+            <div class="flex-element-display">
+                <div class="article-container">
+                    <h1>Latest NEWS</h1>
+                        <article id="latest-news" class="article-container-item">
 
-<div class="background avi-container">
-    <h1 class="avi">avi</h1>
-</div>
+                        </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <%- include('common/footer'); -%>
+    </footer>
 
-<div id="DynamicContent">
 </div>
 
 <script src="../javascript/home/startpage.js"></script>
