@@ -262,5 +262,16 @@ async function mapShot(lat, long, latits, longs) {
     ok = await fetch(url);
 
     console.log(ok.url);
+    exportMapPng(ok.url);
+
+    //download(ok.url, 'map.png', 'data:image/png;');
+
+
+}
+function exportMapPng(url){
+    var mapLinkElement = document.getElementById("map-link");
+    mapLinkElement.href = url;
+    mapLinkElement.innerText = 'View latest shot';
+
 
 }
