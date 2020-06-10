@@ -1,8 +1,5 @@
 
 .dropdown {
-
-
-
     display: inline-block;
 }
 
@@ -18,7 +15,6 @@
 
 .dropdown:active .dropdown-content {
     display: block;
-
 }
 
 .dropbtn {
@@ -28,6 +24,7 @@
     font-size: 16px;
     color:#262635;
     padding: 16px;
+    border-radius: 10px;
 
     border: none;
     cursor: pointer;
@@ -56,10 +53,13 @@
 
 
 .principal{
-    width:600px;height:350px; background-color:antiquewhite;border-radius: 5px;
+    width:600px;
+    height:350px;
+    background-color:antiquewhite;
+    border-radius: 5px;
     position:absolute;
-    left:30%;
-    top:30%;
+    left:50%;
+    top:50%;
     transform: translate(-50%,-50%);
 }
 
@@ -68,6 +68,8 @@
 }
 .dptdown{
     transform: translate(29%,17%);
+    height: 40px;
+    width: 60px;
 }
 .nume{
     position:absolute;
@@ -76,7 +78,8 @@
     transform: translate(-50%,-50%);
 }
 
-.parola {    position:absolute;
+.parola {
+    position:absolute;
     left:25%;
     top:56%;
     transform: translate(-50%,-50%);}
