@@ -8,7 +8,6 @@
         <div class="element-navbar"><a href="/columns">Fields Description</a></div>
         <div class="element-navbar"><a href="/about">About Us</a></div>
         <%try{ if(user){%>
-            <div class="element-navbar"><a href="/history">My History</a></div>
             <div class="element-login-navbar"><a href="/logout">Logout (<%= user.username%>)</a></div>
         <%} else{%>
             <div class="element-login-navbar">
