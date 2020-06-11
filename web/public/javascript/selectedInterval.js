@@ -1,4 +1,5 @@
 function selectedInterval(category, min, max) {
+    console.log('aici');
     const minValue = document.getElementById('min' + category + 'Input').value;
     const maxValue = document.getElementById('max' + category + 'Input').value;
     let obj = {
