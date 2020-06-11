@@ -101,6 +101,8 @@ function deleteLabel(labelId, key, value){
 }
 
 function deleteIntervalLabel(labelId, key, min, max){
+    min = parseFloat(min);
+    max = parseFloat(max);
     for (let i = 0; i < chosenOptions[currentLine].length; i++) {
         if(chosenOptions[currentLine][i].key === key && chosenOptions[currentLine][i].min === min && chosenOptions[currentLine][i].max === max){
             chosenOptions[currentLine].splice(i, 1);
