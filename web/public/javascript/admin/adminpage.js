@@ -25,12 +25,13 @@ async function finalcredentials() {
     else {
 
         let ok = await valid();
-
+        
         if (ok) {
-            location.replace("http://localhost:3000/admin/manager");
+
+            location.replace("/admin/manager");
 
         } else {
-            location.replace("http://localhost:3000/admin");
+            location.replace("/admin");
         }
     }
 }
@@ -47,17 +48,22 @@ async function valid() {
         redirect: 'follow'
     };
 
-    var ok = await fetch("http://localhost:3000/api/admin/login", requestOptions)
+    var ok = await fetch("/api/admin/login", requestOptions)
         .catch(error => console.log('error', error));
 
     await ok.json().then(data=>{
 
         let tkn=data.token;
-        setCookie("adminToken",tkn,30);
+        if(tkn) {
+            setCookie("adminToken", tkn, 30);
+            ok = true;
+        } else{
+            alert('These credentials are not valid.');
+            ok = false;
+        }
 
     });
-
-    return ok.ok;
+    return ok;
 }
 
 
